@@ -1,0 +1,9 @@
+{
+  "name": "crm-celiware",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CRM simples com backend Node para login e clientes.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

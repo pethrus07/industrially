@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1783358038448,
+    "nome": "teste",
+    "email": "celiware@outlook.com",
+    "empresa": "Celiware",
+    "telefone": "11989173876",
+    "status": "diagnostico",
+    "tipoLead": "Novo",
+    "responsavel": "valdir",
+    "valor": 0,
+    "anotacoes": "",
+    "indicadoPor": "",
+    "links": {
+      "whatsapp": "",
+      "linkedin": ""
+    },
+    "ultimoFollowUp": "2026-07-06T20:24:16.068Z"
+  }
+]

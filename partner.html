@@ -1,200 +1,290 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Celiware Sales</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --blue-900:#0a1628;--blue-800:#0f2140;--blue-700:#142d58;--blue-600:#1a3a6e;
-  --blue-500:#2354a0;--blue-400:#3b7ddd;--blue-300:#6ba3f0;--blue-100:#dce8fa;--blue-50:#eef4fd;
-  --orange-500:#f07830;--orange-400:#f59248;--orange-300:#ffb070;--orange-100:#fff0e0;
-  --green-500:#22c55e;--green-100:#dcfce7;--yellow-500:#eab308;--yellow-100:#fef9c3;
-  --red-500:#ef4444;
-  --gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;--gray-300:#cbd5e1;
-  --gray-400:#94a3b8;--gray-500:#64748b;--gray-600:#475569;--gray-700:#334155;--gray-800:#1e293b;
-  --shadow-sm:0 1px 2px rgba(10,22,40,.05);--shadow-md:0 4px 16px rgba(10,22,40,.08);
-  --shadow-lg:0 8px 32px rgba(10,22,40,.12);
-  --shadow-card:0 1px 3px rgba(10,22,40,.06),0 6px 24px rgba(10,22,40,.06);
-  --radius:14px;--radius-sm:10px;--radius-xs:6px;
-  --safe-bottom:env(safe-area-inset-bottom,0px);
-}
-html{-webkit-text-size-adjust:100%}
-body{font-family:'DM Sans',sans-serif;background:var(--gray-50);color:var(--gray-800);min-height:100vh;min-height:100dvh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>IndustriAlly · Dashboard</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234F46E5'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='%2310B981' text-anchor='middle'%3EiA%3C/text%3E%3C/svg%3E">
+  <meta name="theme-color" content="#1e1b4b">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      /* IndustriAlly — paleta roxo/índigo + verde (alinhada à landing) */
+      --blue-900: #1e1b4b; --blue-800: #262063; --blue-700: #312e81; --blue-600: #4338ca;
+      --blue-500: #4f46e5; --blue-400: #6c63ff; --blue-300: #a5b4fc; --blue-100: #e0e7ff; --blue-50: #eef2ff;
+      --orange-500: #059669; --orange-400: #10b981; --orange-300: #34d399; --orange-100: #d1fae5;
+      --green-500: #10b981; --green-100: #d1fae5; --yellow-500: #eab308; --yellow-100: #fef9c3;
+      --red-500: #ef4444;
+      --gray-50: #f8fafc; --gray-100: #f1f5f9; --gray-200: #e2e8f0; --gray-300: #cbd5e1;
+      --gray-400: #94a3b8; --gray-500: #64748b; --gray-600: #475569; --gray-700: #334155; --gray-800: #1e293b;
+      --shadow-sm: 0 1px 3px rgba(30,27,75,.04), 0 2px 6px rgba(0,0,0,.02);
+      --shadow-md: 0 4px 16px rgba(30,27,75,.08);
+      --shadow-lg: 0 8px 32px rgba(30,27,75,.12);
+      --shadow-card: 0 2px 8px rgba(30,27,75,.04), 0 8px 24px rgba(30,27,75,.04);
+      --radius: 16px; --radius-sm: 12px; --radius-xs: 8px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    html { -webkit-text-size-adjust:100%; }
+    body { font-family:'DM Sans', system-ui, -apple-system, sans-serif; background:var(--gray-50); color:var(--gray-800); min-height:100vh; min-height:100dvh; -webkit-font-smoothing:antialiased; overflow-x:hidden; padding-bottom:0; transition:background .2s; }
 
-/* LOGIN */
-.login-screen{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,var(--blue-900) 0%,var(--blue-700) 50%,var(--blue-600) 100%);position:relative;overflow:hidden;padding:16px}
-.login-screen::before{content:'';position:absolute;top:-120px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(240,120,48,.12) 0%,transparent 70%);border-radius:50%}
-.login-screen::after{content:'';position:absolute;bottom:-100px;left:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(59,125,221,.15) 0%,transparent 70%);border-radius:50%}
-.login-card{background:rgba(255,255,255,.06);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:32px 24px;width:100%;max-width:400px;position:relative;z-index:1;animation:loginIn .6s ease}
-@keyframes loginIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-.login-logo{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:10px}
-.login-logo-icon{width:44px;height:44px;background:var(--orange-500);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:20px;box-shadow:0 4px 16px rgba(240,120,48,.4)}
-.login-logo-text{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#fff}
-.login-logo-text span{color:var(--orange-400)}
-.login-subtitle{text-align:center;color:rgba(255,255,255,.45);font-size:13px;margin-bottom:32px}
-.form-group{margin-bottom:16px}
-.form-label{display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);margin-bottom:6px;letter-spacing:.3px}
-.form-input{width:100%;padding:13px 14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;color:#fff;font-size:16px;font-family:inherit;outline:none;transition:all .25s;-webkit-appearance:none}
-.form-input::placeholder{color:rgba(255,255,255,.25)}
-.form-input:focus{border-color:var(--orange-400);background:rgba(255,255,255,.1);box-shadow:0 0 0 3px rgba(240,120,48,.15)}
-.form-input.error{border-color:var(--red-500);box-shadow:0 0 0 3px rgba(239,68,68,.15)}
-.password-wrapper{position:relative}
-.password-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;padding:6px;transition:color .2s}
-.login-error{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:10px 14px;color:#fca5a5;font-size:13px;margin-bottom:16px;display:none;align-items:center;gap:8px;animation:shake .4s ease}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.login-error.show{display:flex}
-.btn-login{width:100%;padding:14px;background:linear-gradient(135deg,var(--orange-500),var(--orange-400));border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .25s;box-shadow:0 4px 16px rgba(240,120,48,.35);-webkit-appearance:none}
-.btn-login:active{transform:scale(.98)}
-.btn-login:disabled{opacity:.7;cursor:not-allowed;transform:none}
-.btn-login .spinner{display:none;width:20px;height:20px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;margin:0 auto}
-.btn-login.loading .btn-text{display:none}
-.btn-login.loading .spinner{display:block}
-@keyframes spin{to{transform:rotate(360deg)}}
-.login-footer{text-align:center;margin-top:24px;color:rgba(255,255,255,.3);font-size:11px}
+    /* ----- LOGIN (refinado) ----- */
+    .login-screen { min-height:100vh; min-height:100dvh; display:flex; align-items:center; justify-content:center; background:linear-gradient(145deg, var(--blue-900) 0%, var(--blue-700) 50%, var(--blue-600) 100%); position:relative; overflow:hidden; padding:20px; }
+    .login-screen::before { content:''; position:absolute; top:-160px; right:-100px; width:400px; height:400px; background:radial-gradient(circle, rgba(16,185,129,.10) 0%, transparent 70%); border-radius:50%; }
+    .login-screen::after { content:''; position:absolute; bottom:-120px; left:-80px; width:360px; height:360px; background:radial-gradient(circle, rgba(108,99,255,.12) 0%, transparent 70%); border-radius:50%; }
+    .login-card { background:rgba(255,255,255,.05); backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px); border:1px solid rgba(255,255,255,.08); border-radius:28px; padding:40px 28px; width:100%; max-width:400px; position:relative; z-index:1; animation:loginIn .5s ease; box-shadow:0 20px 60px rgba(0,0,0,.3); }
+    @keyframes loginIn { from { opacity:0; transform:translateY(16px) scale(.96); } to { opacity:1; transform:translateY(0) scale(1); } }
+    .login-logo { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:8px; }
+    .login-logo-icon { width:48px; height:48px; background:var(--orange-500); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; font-size:22px; box-shadow:0 6px 20px rgba(16,185,129,.3); }
+    .login-logo-text { font-family:'Playfair Display', serif; font-size:28px; font-weight:700; color:#fff; letter-spacing:-.3px; }
+    .login-logo-text span { color:var(--orange-400); }
+    .login-subtitle { text-align:center; color:rgba(255,255,255,.5); font-size:14px; margin-bottom:32px; font-weight:400; letter-spacing:.2px; }
+    .form-group { margin-bottom:18px; }
+    .form-label { display:block; font-size:12px; font-weight:600; color:rgba(255,255,255,.7); margin-bottom:6px; letter-spacing:.4px; text-transform:uppercase; }
+    .form-input { width:100%; padding:14px 16px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:12px; color:#fff; font-size:16px; font-family:inherit; outline:none; transition:all .25s; -webkit-appearance:none; }
+    .form-input::placeholder { color:rgba(255,255,255,.25); font-weight:400; }
+    .form-input:focus { border-color:var(--orange-400); background:rgba(255,255,255,.10); box-shadow:0 0 0 4px rgba(16,185,129,.12); }
+    .form-input.error { border-color:var(--red-500); box-shadow:0 0 0 4px rgba(239,68,68,.12); }
+    .password-wrapper { position:relative; }
+    .password-toggle { position:absolute; right:14px; top:50%; transform:translateY(-50%); background:none; border:none; color:rgba(255,255,255,.35); cursor:pointer; padding:6px; transition:color .2s; }
+    .password-toggle:hover { color:rgba(255,255,255,.7); }
+    .login-error { background:rgba(239,68,68,.12); border:1px solid rgba(239,68,68,.2); border-radius:12px; padding:10px 14px; color:#fca5a5; font-size:13px; margin-bottom:18px; display:none; align-items:center; gap:10px; animation:shake .35s ease; }
+    .login-error.show { display:flex; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+    .btn-login { width:100%; padding:15px; background:linear-gradient(135deg, var(--orange-500), var(--orange-400)); border:none; border-radius:14px; color:#fff; font-size:16px; font-weight:600; font-family:inherit; cursor:pointer; transition:all .25s; box-shadow:0 6px 20px rgba(16,185,129,.3); -webkit-appearance:none; }
+    .btn-login:active { transform:scale(.97); }
+    .btn-login:disabled { opacity:.7; cursor:not-allowed; transform:none; }
+    .btn-login .spinner { display:none; width:22px; height:22px; border:2px solid rgba(255,255,255,.25); border-top-color:#fff; border-radius:50%; animation:spin .6s linear infinite; margin:0 auto; }
+    .btn-login.loading .btn-text { display:none; }
+    .btn-login.loading .spinner { display:block; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .login-footer { text-align:center; margin-top:28px; color:rgba(255,255,255,.25); font-size:12px; letter-spacing:.4px; }
 
-/* APP */
-.page{display:none}.page.visible{display:block}
-.header{background:linear-gradient(135deg,var(--blue-900) 0%,var(--blue-700) 60%,var(--blue-600) 100%);padding:0 0 40px;position:relative;overflow:hidden}
-.header::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(240,120,48,.15) 0%,transparent 70%);border-radius:50%}
-.header-inner{padding:max(16px,env(safe-area-inset-top,16px)) 16px 0;position:relative;z-index:1}
-.top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.logo{display:flex;align-items:center;gap:10px}
-.logo-icon{width:36px;height:36px;background:var(--orange-500);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:16px;box-shadow:0 3px 10px rgba(240,120,48,.35)}
-.logo-text{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;letter-spacing:-.3px}
-.logo-text span{color:var(--orange-400)}
-.btn-logout{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.greeting{color:#fff}
-.greeting h1{font-size:22px;font-weight:600;margin-bottom:2px}
-.greeting p{font-size:13px;color:rgba(255,255,255,.55)}
-.main{margin:-20px auto 0;padding:0 16px 32px;position:relative;z-index:2}
-.page-title-bar{background:#fff;border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow-card);margin-bottom:16px}
-.page-title-bar h2{font-size:18px;font-weight:700;color:var(--gray-800);margin-bottom:2px}
-.page-title-bar p{font-size:12px;color:var(--gray-500)}
-.summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:24px}
-.summary-card{background:#fff;border-radius:var(--radius);padding:14px;box-shadow:var(--shadow-card);display:flex;align-items:flex-start;gap:10px;cursor:default}
-.summary-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.summary-icon svg{width:18px;height:18px}
-.summary-icon.blue{background:var(--blue-100);color:var(--blue-500)}
-.summary-icon.orange{background:var(--orange-100);color:var(--orange-500)}
-.summary-icon.green{background:var(--green-100);color:var(--green-500)}
-.summary-icon.yellow{background:var(--yellow-100);color:var(--yellow-500)}
-.summary-info h3{font-size:20px;font-weight:700;color:var(--gray-800);line-height:1;margin-bottom:2px}
-.summary-info p{font-size:11px;color:var(--gray-500);line-height:1.3}
-.section{margin-bottom:24px}
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.section-title{font-size:16px;font-weight:700;color:var(--gray-800)}
-.section-link{font-size:13px;font-weight:600;color:var(--orange-500);text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.tabs{display:flex;gap:4px;background:var(--gray-100);border-radius:10px;padding:3px;margin-bottom:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tab{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;color:var(--gray-500);cursor:pointer;border:none;background:none;white-space:nowrap;-webkit-tap-highlight-color:transparent;transition:all .2s}
-.tab.active{background:#fff;color:var(--blue-700);box-shadow:var(--shadow-sm)}
-.card-list{display:flex;flex-direction:column;gap:8px}
-.card-item{background:#fff;border-radius:var(--radius-sm);padding:14px;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:12px;cursor:pointer;border:1px solid transparent;-webkit-tap-highlight-color:transparent;transition:all .15s}
-.card-item:active{transform:scale(.98);background:var(--gray-50)}
-.card-avatar{width:38px;height:38px;border-radius:10px;background:var(--blue-50);color:var(--blue-500);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
-.card-body{flex:1;min-width:0}
-.card-body h4{font-size:14px;font-weight:600;color:var(--gray-800);margin-bottom:2px}
-.card-body p{font-size:11px;color:var(--gray-400);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-chevron{color:var(--gray-300);font-size:16px;margin-left:4px;flex-shrink:0}
-.opp-grid{display:flex;flex-direction:column;gap:10px}
-.opp-card{background:#fff;border-radius:var(--radius-sm);padding:14px;box-shadow:var(--shadow-sm);border:1px solid transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .15s}
-.opp-card:active{transform:scale(.98);background:var(--gray-50)}
-.opp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.opp-company{font-size:14px;font-weight:600;color:var(--gray-800)}
-.opp-type{font-size:12px;color:var(--gray-500);margin-bottom:10px}
-.opp-bottom{display:flex;align-items:center;justify-content:space-between}
-.opp-value{font-size:17px;font-weight:700;color:var(--blue-700)}
-.opp-value.hidden-value{font-size:12px;font-weight:600;color:var(--gray-400);font-style:italic}
-.badge{display:inline-block;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:600;white-space:nowrap}
-.badge-sent{background:var(--blue-100);color:var(--blue-500)}
-.badge-meeting{background:var(--orange-100);color:var(--orange-500)}
-.badge-negotiation{background:var(--yellow-100);color:#a16207}
-.badge-closed{background:var(--green-100);color:#16a34a}
-.badge-analysis{background:var(--gray-100);color:var(--gray-500)}
-.badge-contact{background:#f3e8ff;color:#7c3aed}
-.badge-survey{background:#e0f2fe;color:#0284c7}
-.search-bar{margin-bottom:16px}
-.search-input{width:100%;padding:11px 14px;background:#fff;border:1px solid var(--gray-200);border-radius:10px;font-size:14px;font-family:inherit;color:var(--gray-800);outline:none;-webkit-appearance:none;transition:all .2s}
-.search-input:focus{border-color:var(--blue-400);box-shadow:0 0 0 3px rgba(35,84,160,.1)}
-.search-input::placeholder{color:var(--gray-400)}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,22,40,.5);backdrop-filter:blur(4px);z-index:200;align-items:flex-end;justify-content:center;padding:0}
-.modal-overlay.show{display:flex}
-.modal{background:#fff;border-radius:20px 20px 0 0;padding:24px 20px calc(20px + var(--safe-bottom));width:100%;max-height:80vh;max-height:80dvh;overflow-y:auto;box-shadow:0 -8px 32px rgba(10,22,40,.15);animation:sheetUp .3s ease}
-@keyframes sheetUp{from{opacity:0;transform:translateY(100%)}to{opacity:1;transform:translateY(0)}}
-.modal-handle{width:36px;height:4px;background:var(--gray-300);border-radius:2px;margin:0 auto 16px}
-.modal-close{float:right;background:var(--gray-100);border:none;width:32px;height:32px;border-radius:8px;font-size:18px;cursor:pointer;color:var(--gray-500);display:flex;align-items:center;justify-content:center}
-.modal h3{font-size:18px;font-weight:700;color:var(--gray-800);margin-bottom:2px}
-.modal .modal-sub{font-size:12px;color:var(--gray-500);margin-bottom:16px}
-.modal-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:13px}
-.modal-row:last-child{border-bottom:none}
-.modal-label{color:var(--gray-500);font-weight:500}
-.modal-val{color:var(--gray-800);font-weight:600;text-align:right;max-width:55%;word-break:break-word}
-.report-grid{display:flex;flex-direction:column;gap:12px}
-.report-card{background:#fff;border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow-card)}
-.report-card h4{font-size:12px;font-weight:600;color:var(--gray-500);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
-.report-bar{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.report-bar-label{font-size:12px;color:var(--gray-600);width:100px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.report-bar-track{flex:1;height:6px;background:var(--gray-100);border-radius:3px;overflow:hidden}
-.report-bar-fill{height:100%;border-radius:3px;transition:width .6s ease}
-.report-bar-value{font-size:12px;font-weight:700;color:var(--gray-800);width:30px;text-align:right;flex-shrink:0}
-.report-big-number{font-size:28px;font-weight:700;color:var(--blue-700);margin-bottom:2px}
-.report-big-label{font-size:12px;color:var(--gray-500)}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--gray-200);padding:6px 0 max(6px,var(--safe-bottom));display:none;justify-content:space-around;z-index:100;box-shadow:0 -2px 10px rgba(0,0,0,.04)}
-.bottom-nav.visible{display:flex}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 12px;cursor:pointer;border:none;background:none;color:var(--gray-400);font-size:10px;font-weight:600;-webkit-tap-highlight-color:transparent;transition:color .2s}
-.nav-item.active{color:var(--orange-500)}
-.nav-item svg{width:22px;height:22px}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.animate{animation:fadeUp .4s ease both}
-.delay-1{animation-delay:.05s}.delay-2{animation-delay:.1s}.delay-3{animation-delay:.15s}.delay-4{animation-delay:.2s}.delay-5{animation-delay:.25s}
+    /* ----- APP (refinado) ----- */
+    .page { display:none; }
+    .page.visible { display:block; animation:fadeUp .35s ease; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
 
-@media(min-width:768px){
-  .login-card{padding:48px 40px;border-radius:24px}
-  .header-inner{max-width:960px;margin:0 auto;padding:24px 32px 0}
-  .main{max-width:960px;margin:-24px auto 0;padding:0 32px 40px}
-  .greeting h1{font-size:26px}
-  .summary-grid{grid-template-columns:repeat(3,1fr);gap:14px}
-  .summary-card{padding:18px}
-  .summary-info h3{font-size:24px}
-  .opp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  .report-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-  .modal-overlay{align-items:center;padding:20px}
-  .modal{border-radius:20px;max-width:480px;padding:28px 24px;animation:modalIn .3s ease}
-  @keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
-  .modal-handle{display:none}
-  .report-big-number{font-size:32px}
-}
-@media(min-width:1024px){
-  .header-inner,.main{max-width:1100px}
-  .summary-grid{grid-template-columns:repeat(5,1fr)}
-  .opp-grid{grid-template-columns:repeat(3,1fr)}
-}
-</style>
+    .header { background:linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 60%, var(--blue-600) 100%); padding:0 0 44px; position:relative; overflow:hidden; border-radius:0 0 32px 32px; box-shadow:0 8px 30px rgba(30,27,75,.2); }
+    .header::before { content:''; position:absolute; top:-80px; right:-80px; width:260px; height:260px; background:radial-gradient(circle, rgba(16,185,129,.12) 0%, transparent 70%); border-radius:50%; }
+    .header-inner { padding:max(20px, env(safe-area-inset-top, 20px)) 20px 0; position:relative; z-index:1; max-width:1200px; margin:0 auto; }
+    .top-bar { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+    .logo { display:flex; align-items:center; gap:12px; }
+    .logo-icon { width:40px; height:40px; background:var(--orange-500); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; font-size:18px; box-shadow:0 4px 14px rgba(16,185,129,.3); }
+    .logo-text { font-family:'Playfair Display', serif; font-size:22px; font-weight:700; color:#fff; letter-spacing:-.3px; }
+    .logo-text span { color:var(--orange-400); }
+    .btn-logout { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); color:rgba(255,255,255,.7); padding:8px 18px; border-radius:10px; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer; backdrop-filter:blur(4px); transition:all .2s; -webkit-tap-highlight-color:transparent; }
+    .btn-logout:hover { background:rgba(255,255,255,.14); color:#fff; }
+    .greeting { color:#fff; margin-bottom:6px; }
+    .greeting h1 { font-size:24px; font-weight:700; margin-bottom:4px; letter-spacing:-.2px; }
+    .greeting p { font-size:14px; color:rgba(255,255,255,.6); font-weight:400; }
+
+    .main { margin:-24px auto 0; padding:0 16px 32px; position:relative; z-index:2; max-width:1200px; }
+
+    .page-title-bar { background:#fff; border-radius:var(--radius); padding:20px 20px; box-shadow:var(--shadow-card); margin-bottom:20px; border:1px solid rgba(0,0,0,.02); }
+    .page-title-bar h2 { font-size:20px; font-weight:700; color:var(--gray-800); margin-bottom:4px; }
+    .page-title-bar p { font-size:13px; color:var(--gray-500); font-weight:400; }
+
+    .summary-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:12px; margin-bottom:28px; }
+    .summary-card { background:#fff; border-radius:var(--radius); padding:18px 16px; box-shadow:var(--shadow-card); display:flex; align-items:flex-start; gap:14px; border:1px solid rgba(0,0,0,.02); transition:transform .15s, box-shadow .2s; }
+    .summary-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
+    .summary-icon { width:44px; height:44px; border-radius:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .summary-icon svg { width:20px; height:20px; }
+    .summary-icon.blue { background:var(--blue-50); color:var(--blue-500); }
+    .summary-icon.orange { background:var(--orange-100); color:var(--orange-500); }
+    .summary-icon.green { background:var(--green-100); color:var(--green-500); }
+    .summary-icon.yellow { background:var(--yellow-100); color:var(--yellow-500); }
+    .summary-info h3 { font-size:22px; font-weight:700; color:var(--gray-800); line-height:1.1; margin-bottom:2px; }
+    .summary-info p { font-size:12px; color:var(--gray-500); font-weight:500; letter-spacing:.2px; }
+
+    .section { margin-bottom:28px; }
+    .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+    .section-title { font-size:18px; font-weight:700; color:var(--gray-800); }
+    .section-link { font-size:13px; font-weight:600; color:var(--orange-500); text-decoration:none; cursor:pointer; transition:color .2s; -webkit-tap-highlight-color:transparent; }
+    .section-link:hover { color:var(--orange-400); }
+
+    .tabs { display:flex; gap:6px; background:var(--gray-100); border-radius:12px; padding:4px; margin-bottom:16px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+    .tabs::-webkit-scrollbar { display:none; }
+    .tab { padding:8px 18px; border-radius:10px; font-size:13px; font-weight:600; color:var(--gray-500); cursor:pointer; border:none; background:transparent; white-space:nowrap; transition:all .2s; -webkit-tap-highlight-color:transparent; }
+    .tab.active { background:#fff; color:var(--blue-700); box-shadow:var(--shadow-sm); }
+
+    .card-list { display:flex; flex-direction:column; gap:10px; }
+    .card-item { background:#fff; border-radius:var(--radius-sm); padding:16px; box-shadow:var(--shadow-sm); display:flex; align-items:center; gap:14px; cursor:pointer; border:1px solid transparent; transition:all .15s; -webkit-tap-highlight-color:transparent; }
+    .card-item:active { transform:scale(.98); background:var(--gray-50); border-color:var(--gray-200); }
+    .card-avatar { width:44px; height:44px; border-radius:12px; background:var(--blue-50); color:var(--blue-500); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; flex-shrink:0; }
+    .card-body { flex:1; min-width:0; }
+    .card-body h4 { font-size:15px; font-weight:600; color:var(--gray-800); margin-bottom:2px; }
+    .card-body p { font-size:12px; color:var(--gray-400); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .card-chevron { color:var(--gray-300); font-size:18px; margin-left:4px; flex-shrink:0; }
+
+    .opp-grid { display:flex; flex-direction:column; gap:12px; }
+    .opp-card { background:#fff; border-radius:var(--radius-sm); padding:16px; box-shadow:var(--shadow-sm); border:1px solid transparent; cursor:pointer; transition:all .15s; -webkit-tap-highlight-color:transparent; }
+    .opp-card:active { transform:scale(.98); background:var(--gray-50); border-color:var(--gray-200); }
+    .opp-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
+    .opp-company { font-size:15px; font-weight:600; color:var(--gray-800); }
+    .opp-type { font-size:13px; color:var(--gray-500); margin-bottom:8px; }
+    .opp-bottom { display:flex; align-items:center; justify-content:space-between; }
+    .opp-value { font-size:18px; font-weight:700; color:var(--blue-700); }
+    .opp-value.hidden-value { font-size:13px; font-weight:600; color:var(--gray-400); font-style:italic; }
+    .badge { display:inline-block; padding:4px 12px; border-radius:30px; font-size:11px; font-weight:600; white-space:nowrap; letter-spacing:.2px; }
+    .badge-sent { background:var(--blue-100); color:var(--blue-500); }
+    .badge-meeting { background:var(--orange-100); color:var(--orange-500); }
+    .badge-negotiation { background:var(--yellow-100); color:#a16207; }
+    .badge-closed { background:var(--green-100); color:#16a34a; }
+    .badge-analysis { background:var(--gray-100); color:var(--gray-600); }
+    .badge-contact { background:#f3e8ff; color:#7c3aed; }
+    .badge-survey { background:#e0f2fe; color:#0284c7; }
+
+    .search-bar { margin-bottom:18px; }
+    .search-input { width:100%; padding:12px 16px; background:#fff; border:1px solid var(--gray-200); border-radius:12px; font-size:15px; font-family:inherit; color:var(--gray-800); outline:none; transition:all .2s; -webkit-appearance:none; }
+    .search-input:focus { border-color:var(--blue-400); box-shadow:0 0 0 4px rgba(99,102,241,.06); }
+    .search-input::placeholder { color:var(--gray-400); }
+
+    .report-grid { display:flex; flex-direction:column; gap:16px; }
+    .report-card { background:#fff; border-radius:var(--radius); padding:20px 20px; box-shadow:var(--shadow-card); border:1px solid rgba(0,0,0,.02); }
+    .report-card h4 { font-size:12px; font-weight:600; color:var(--gray-500); margin-bottom:14px; text-transform:uppercase; letter-spacing:.6px; }
+    .report-bar { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+    .report-bar-label { font-size:13px; color:var(--gray-600); width:110px; flex-shrink:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:500; }
+    .report-bar-track { flex:1; height:7px; background:var(--gray-100); border-radius:4px; overflow:hidden; }
+    .report-bar-fill { height:100%; border-radius:4px; transition:width .8s ease; }
+    .report-bar-value { font-size:13px; font-weight:700; color:var(--gray-800); width:32px; text-align:right; flex-shrink:0; }
+    .report-big-number { font-size:32px; font-weight:700; color:var(--blue-700); margin-bottom:2px; }
+    .report-big-label { font-size:13px; color:var(--gray-500); }
+
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(30,27,75,.5); backdrop-filter:blur(6px); z-index:200; align-items:flex-end; justify-content:center; padding:0; }
+    .modal-overlay.show { display:flex; }
+    .modal { background:#fff; border-radius:28px 28px 0 0; padding:28px 24px calc(24px + var(--safe-bottom)); width:100%; max-height:80vh; max-height:80dvh; overflow-y:auto; box-shadow:0 -12px 48px rgba(30,27,75,.12); animation:sheetUp .3s ease; }
+    @keyframes sheetUp { from { opacity:0; transform:translateY(100%); } to { opacity:1; transform:translateY(0); } }
+    .modal-handle { width:40px; height:5px; background:var(--gray-300); border-radius:4px; margin:0 auto 16px; }
+    .modal-close { float:right; background:var(--gray-100); border:none; width:36px; height:36px; border-radius:10px; font-size:20px; cursor:pointer; color:var(--gray-500); display:flex; align-items:center; justify-content:center; transition:background .2s; }
+    .modal-close:hover { background:var(--gray-200); }
+    .modal h3 { font-size:20px; font-weight:700; color:var(--gray-800); margin-bottom:2px; }
+    .modal .modal-sub { font-size:13px; color:var(--gray-500); margin-bottom:18px; }
+    .modal-row { display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--gray-100); font-size:14px; }
+    .modal-row:last-child { border-bottom:none; }
+    .modal-label { color:var(--gray-500); font-weight:500; }
+    .modal-val { color:var(--gray-800); font-weight:600; text-align:right; max-width:55%; word-break:break-word; }
+
+    .bottom-nav { position:fixed; bottom:0; left:0; right:0; background:rgba(255,255,255,.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-top:1px solid var(--gray-200); padding:6px 0 max(6px,var(--safe-bottom)); display:none; justify-content:space-around; z-index:100; box-shadow:0 -4px 20px rgba(0,0,0,.04); }
+    .bottom-nav.visible { display:flex; }
+    .nav-item { display:flex; flex-direction:column; align-items:center; gap:2px; padding:4px 12px; cursor:pointer; border:none; background:none; color:var(--gray-400); font-size:11px; font-weight:600; transition:color .2s; -webkit-tap-highlight-color:transparent; }
+    .nav-item.active { color:var(--orange-500); }
+    .nav-item svg { width:24px; height:24px; }
+
+    .animate { animation:fadeUp .4s ease both; }
+    .delay-1 { animation-delay:.04s; } .delay-2 { animation-delay:.08s; } .delay-3 { animation-delay:.12s; } .delay-4 { animation-delay:.16s; } .delay-5 { animation-delay:.20s; }
+
+    /* ----- FAB nova indicação ----- */
+    .fab-indication { position:fixed; right:20px; bottom:calc(76px + var(--safe-bottom)); width:58px; height:58px; border-radius:50%; background:linear-gradient(135deg, var(--orange-500), var(--orange-400)); border:none; color:#fff; box-shadow:0 8px 24px rgba(16,185,129,.45); cursor:pointer; display:none; align-items:center; justify-content:center; z-index:110; transition:transform .15s; }
+    .fab-indication.visible { display:flex; }
+    .fab-indication:active { transform:scale(.9); }
+    .fab-indication svg { width:26px; height:26px; }
+
+    /* ----- Formulário dentro do modal ----- */
+    .form-field { margin-bottom:14px; text-align:left; }
+    .form-field label { display:block; font-size:12px; font-weight:600; color:var(--gray-600); margin-bottom:5px; letter-spacing:.2px; }
+    .form-field input, .form-field textarea { width:100%; padding:11px 13px; border:1px solid var(--gray-200); border-radius:10px; font-size:15px; font-family:inherit; color:var(--gray-800); outline:none; background:#fff; transition:border .2s, box-shadow .2s; -webkit-appearance:none; }
+    .form-field input:focus, .form-field textarea:focus { border-color:var(--blue-400); box-shadow:0 0 0 3px rgba(99,102,241,.08); }
+    .form-field textarea { resize:vertical; }
+    .form-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .btn-submit { width:100%; padding:14px; margin-top:6px; background:linear-gradient(135deg, var(--orange-500), var(--orange-400)); color:#fff; border:none; border-radius:12px; font-size:15px; font-weight:600; font-family:inherit; cursor:pointer; box-shadow:0 6px 20px rgba(16,185,129,.3); }
+    .btn-submit:disabled { opacity:.6; cursor:not-allowed; }
+    .form-error { color:var(--red-500); font-size:13px; margin-bottom:10px; display:none; background:rgba(239,68,68,.08); border:1px solid rgba(239,68,68,.2); border-radius:10px; padding:9px 12px; }
+    .form-error.show { display:block; }
+
+    /* ----- Comissões ----- */
+    .comm-badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600; }
+    .comm-confirmed { background:var(--green-100); color:#16a34a; }
+    .comm-pending { background:var(--yellow-100); color:#a16207; }
+
+    /* ----- Toggle login/signup ----- */
+    .login-switch { text-align:center; margin-top:20px; color:rgba(255,255,255,.55); font-size:13px; }
+    .login-switch a { color:var(--orange-400); font-weight:600; cursor:pointer; text-decoration:none; }
+    .login-switch a:hover { color:var(--orange-300); }
+
+    /* ----- Card "Meu link de indicação" ----- */
+    .refer-card { background:linear-gradient(135deg, var(--blue-700), var(--blue-500)); color:#fff; border-radius:var(--radius); padding:20px; margin-bottom:20px; display:flex; flex-direction:column; gap:18px; box-shadow:var(--shadow-md); position:relative; overflow:hidden; }
+    .refer-card::before { content:''; position:absolute; top:-50px; right:-40px; width:180px; height:180px; background:radial-gradient(circle, rgba(16,185,129,.28) 0%, transparent 70%); border-radius:50%; }
+    .refer-info { position:relative; z-index:1; }
+    .refer-eyebrow { font-size:12px; font-weight:700; color:var(--orange-300); letter-spacing:.3px; }
+    .refer-info h3 { font-size:18px; font-weight:700; margin:5px 0 4px; }
+    .refer-info p { font-size:13px; color:rgba(255,255,255,.72); margin-bottom:14px; line-height:1.45; }
+    .refer-linkrow { display:flex; gap:8px; margin-bottom:10px; }
+    .refer-linkrow input { flex:1; min-width:0; padding:11px 13px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.1); color:#fff; border-radius:10px; font-size:13px; font-family:inherit; outline:none; }
+    .refer-btn { padding:11px 18px; background:linear-gradient(135deg, var(--orange-500), var(--orange-400)); color:#fff; border:none; border-radius:10px; font-weight:600; font-size:13px; cursor:pointer; font-family:inherit; white-space:nowrap; transition:transform .15s; }
+    .refer-btn:active { transform:scale(.95); }
+    .refer-share { width:100%; padding:12px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); color:#fff; border-radius:10px; font-weight:600; font-size:13.5px; cursor:pointer; font-family:inherit; }
+    .refer-share:active { transform:scale(.98); }
+    .refer-qr { align-self:center; background:#fff; border-radius:16px; padding:10px; line-height:0; position:relative; z-index:1; box-shadow:0 8px 24px rgba(0,0,0,.18); }
+    .refer-qr img { width:132px; height:132px; display:block; }
+    @media (min-width:600px) {
+      .refer-card { flex-direction:row; align-items:center; gap:24px; }
+      .refer-info { flex:1; }
+    }
+
+    @media (min-width:768px) {
+      .login-card { padding:48px 40px; border-radius:32px; }
+      .header-inner { padding:28px 40px 0; }
+      .main { padding:0 40px 40px; margin-top:-28px; }
+      .greeting h1 { font-size:28px; }
+      .summary-grid { grid-template-columns:repeat(3, 1fr); gap:16px; }
+      .summary-card { padding:20px; }
+      .summary-info h3 { font-size:26px; }
+      .opp-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; }
+      .report-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:18px; }
+      .modal-overlay { align-items:center; padding:24px; }
+      .modal { border-radius:28px; max-width:480px; padding:32px 28px; animation:modalIn .3s ease; }
+      @keyframes modalIn { from { opacity:0; transform:scale(.95) translateY(8px); } to { opacity:1; transform:scale(1) translateY(0); } }
+      .modal-handle { display:none; }
+      .report-big-number { font-size:36px; }
+    }
+    @media (min-width:1024px) {
+      .header-inner, .main { max-width:1200px; }
+      .summary-grid { grid-template-columns:repeat(5, 1fr); }
+      .opp-grid { grid-template-columns:repeat(3, 1fr); }
+    }
+  </style>
 </head>
 <body>
 
 <div class="login-screen" id="loginScreen">
   <div class="login-card">
-    <div class="login-logo"><img src="logo.png" style="width:52px;height:52px;object-fit:contain"><div class="login-logo-text">Celiware <span>Sales</span></div></div>
-    <p class="login-subtitle">Acesse sua conta para continuar</p>
+    <div class="login-logo">
+      <div class="login-logo-text">Industri<span>Ally</span></div>
+    </div>
+    <p class="login-subtitle" id="loginSubtitle">Acesse sua conta para continuar</p>
     <div class="login-error" id="loginError"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span id="loginErrorMsg"></span></div>
-    <div class="form-group"><label class="form-label">Usuário</label><input class="form-input" type="text" id="loginUser" placeholder="Digite seu usuário" autocomplete="username"></div>
+    <div class="form-group signup-only" style="display:none"><label class="form-label">Nome completo</label><input class="form-input" type="text" id="signName" placeholder="Seu nome"></div>
+    <div class="form-group signup-only" style="display:none"><label class="form-label">Empresa / Representação</label><input class="form-input" type="text" id="signCompany" placeholder="Nome da sua empresa"></div>
+    <div class="form-group"><label class="form-label">E-mail</label><input class="form-input" type="email" id="loginUser" placeholder="voce@empresa.com" autocomplete="username"></div>
+    <div class="form-group signup-only" style="display:none"><label class="form-label">Telefone</label><input class="form-input" type="tel" id="signPhone" placeholder="(11) 90000-0000"></div>
     <div class="form-group"><label class="form-label">Senha</label><div class="password-wrapper"><input class="form-input" type="password" id="loginPass" placeholder="Digite sua senha" autocomplete="current-password"><button class="password-toggle" type="button" id="togglePass" aria-label="Mostrar senha"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div>
     <button class="btn-login" id="btnLogin"><span class="btn-text">Entrar</span><div class="spinner"></div></button>
-    <p class="login-footer">© 2026 Celiware Automação Industrial</p>
+    <p class="login-switch"><span id="switchText">Ainda não é parceiro?</span> <a id="switchLink">Criar conta</a></p>
+    <p class="login-footer">© 2026 IndustriAlly</p>
   </div>
 </div>
 
 <div id="appShell" style="display:none">
   <header class="header"><div class="header-inner">
-    <div class="top-bar"><div class="logo"><img src="logo.png" style="width:36px;height:36px;object-fit:contain"><div class="logo-text">Celiware <span>Sales</span></div></div><button class="btn-logout" id="btnLogout">Sair</button></div>
+    <div class="top-bar"><div class="logo"><div class="logo-text">Industri<span>Ally</span></div></div><button class="btn-logout" id="btnLogout">Sair</button></div>
     <div class="greeting animate"><h1 id="greetingName"></h1><p id="greetingCompany"></p></div>
   </div></header>
 
   <div class="page visible" id="pageHome"><main class="main">
+    <div class="refer-card" id="referCard" style="display:none">
+      <div class="refer-info">
+        <span class="refer-eyebrow">🔗 SEU LINK DE INDICAÇÃO</span>
+        <h3>Compartilhe e ganhe comissão</h3>
+        <p>Envie para contatos da indústria. Toda indicação feita pelo seu link já entra no seu nome, automaticamente.</p>
+        <div class="refer-linkrow">
+          <input id="referLink" readonly>
+          <button id="referCopy" class="refer-btn">Copiar</button>
+        </div>
+        <button id="referShare" class="refer-share">📲 Compartilhar link</button>
+      </div>
+      <div class="refer-qr"><img id="referQr" alt="QR do seu link de indicação"></div>
+    </div>
     <div class="summary-grid" id="summaryGrid"></div>
     <section class="section"><div class="section-header"><h2 class="section-title">Indicações</h2><a class="section-link" onclick="App.navigate('indications')">Ver todas</a></div><div class="card-list" id="homeIndicacoes"></div></section>
     <section class="section"><div class="section-header"><h2 class="section-title">Oportunidades</h2><a class="section-link" onclick="App.navigate('opportunities')">Ver todas</a></div>
@@ -209,6 +299,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray-50);color:var(--gray
 
 <div class="modal-overlay" id="modalOverlay"><div class="modal" id="modalContent"></div></div>
 
+<button class="fab-indication" id="btnNewIndication" type="button" aria-label="Indicar cliente">
+  <svg fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+</button>
+
 <nav class="bottom-nav" id="bottomNav">
   <button class="nav-item active" data-page="home"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Início</button>
   <button class="nav-item" data-page="indications"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Indicações</button>
@@ -219,154 +313,430 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray-50);color:var(--gray
 <script>
 /*
 ╔══════════════════════════════════════════════════════════════╗
-║  CELIWARE SALES — PRODUCTION (Mobile-First)                 ║
+║  INDUSTRIALLY — PORTAL DO PARCEIRO (Mobile-First)           ║
 ║  Configure API_CONFIG abaixo e pronto.                      ║
 ╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-║  POST /api/auth/login                                        ║
-║  REQUEST:  { "username": "string", "password": "string" }    ║
-║  RESPONSE: { "status": 1, "token": "jwt..." }               ║
-║  ERRO:     { "status": 0, "message": "..." }                ║
-║                                                              ║
-║  GET /api/dashboard  (Authorization: Bearer <token>)         ║
-║  RESPONSE: {                                                 ║
-║    "status": 1,                                              ║
-║    "user":      { "name", "company" },                       ║
-║    "dashboard": { totalIndications, totalOpportunities,      ║
-║                   totalOpportunityValue,                     ║
-║                   acceptedOpportunities,                     ║
-║                   pendingOpportunities },                    ║
-║    "indications": [{ company, person, position,              ║
-║                      segment, city, interest }],             ║
-║    "opportunities": [{ company, type, value,                 ║
-║                        stage, accepted (bool) }]             ║
-║  }                                                           ║
-║                                                              ║
-║  REGRA: accepted=false → valor oculto no frontend            ║
+║  POST /api/auth/login                                       ║
+║  REQUEST:  { "username": "string", "password": "string" }   ║
+║  RESPONSE: { "status": 1, "token": "jwt..." }              ║
+║  ERRO:     { "status": 0, "message": "..." }               ║
+║  GET /api/dashboard  (Authorization: Bearer <token>)       ║
+║  RESPONSE: { "user":..., "dashboard":..., "indications":...}║
 ╚══════════════════════════════════════════════════════════════╝
 */
-
 const ApiService = {
+  tokenKey: 'industrially_partner_token',
+
+  get token() {
+    return sessionStorage.getItem(this.tokenKey);
+  },
+
+  set token(value) {
+    if (value) sessionStorage.setItem(this.tokenKey, value);
+    else sessionStorage.removeItem(this.tokenKey);
+  },
+
+  async request(path, options = {}) {
+    const headers = {
+      'Content-Type': 'application/json',
+      ...(options.headers || {}),
+    };
+
+    if (this.token) {
+      headers.Authorization = 'Bearer ' + this.token;
+    }
+
+    const res = await fetch(path, { ...options, headers });
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok || data.status === 0) {
+      throw new Error(data.message || data.erro || 'Nao foi possivel concluir a requisicao.');
+    }
+
+    return data;
+  },
+
   async login(username, password) {
-    // Carrega dados.json local e autentica
-    const res = await fetch('dados.json');
-    if (!res.ok) throw new Error('Arquivo dados.json não encontrado');
-    const db = await res.json();
+    const data = await this.request('/api/partner/login', {
+      method: 'POST',
+      body: JSON.stringify({ username, password }),
+    });
 
-    const user = db.users.find(u => u.login === username && u.password === password);
-    if (!user) throw new Error('Usuário ou senha inválidos');
-
-    return user;
+    this.token = data.token;
+    return data;
   },
 
-  logout() {}
+  async signup(payload) {
+    const data = await this.request('/api/partner/signup', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+
+    this.token = data.token;
+    return data;
+  },
+
+  async getDashboard() {
+    return this.request('/api/partner/dashboard');
+  },
+
+  async createOpportunity(payload) {
+    return this.request('/api/partner/opportunities', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  async logout() {
+    try {
+      if (this.token) {
+        await this.request('/api/partner/logout', { method: 'POST' });
+      }
+    } finally {
+      this.token = null;
+    }
+  }
 };
-
 const App = {
-  data:null, currentPage:'home', homeFilter:'all', oppFilter:'all',
-  ini(n){return n.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase()},
-  cur(v){return 'R$ '+v.toLocaleString('pt-BR')},
-  bc(stage){const s=stage.toLowerCase();if(s.includes('proposta'))return'badge-sent';if(s.includes('reunião')||s.includes('reuniao'))return'badge-meeting';if(s.includes('negoci'))return'badge-negotiation';if(s.includes('fechado'))return'badge-closed';if(s.includes('contato'))return'badge-contact';if(s.includes('levant')||s.includes('análise')||s.includes('analise'))return'badge-survey';return'badge-analysis'},
-
-  navigate(p){
-    this.currentPage=p;
-    document.querySelectorAll('.page').forEach(x=>x.classList.remove('visible'));
-    document.getElementById({home:'pageHome',indications:'pageIndications',opportunities:'pageOpportunities',reports:'pageReports'}[p]).classList.add('visible');
-    document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.page===p));
-    window.scrollTo({top:0,behavior:'smooth'});
-    if(p==='indications')this.renderAllInd();
-    if(p==='opportunities')this.renderAllOpp();
-    if(p==='reports')this.renderReports();
+  data: null, currentPage: 'home', homeFilter: 'all', oppFilter: 'all',
+  ini(n) { return n.split(' ').map(w => w[0]).slice(0,2).join('').toUpperCase(); },
+  cur(v) { return 'R$ ' + v.toLocaleString('pt-BR'); },
+  bc(stage) {
+    const s = stage.toLowerCase();
+    if (s.includes('proposta')) return 'badge-sent';
+    if (s.includes('reunião') || s.includes('reuniao')) return 'badge-meeting';
+    if (s.includes('negoci')) return 'badge-negotiation';
+    if (s.includes('fechad')) return 'badge-closed';
+    if (s.includes('perdid')) return 'badge-analysis';
+    if (s.includes('contato')) return 'badge-contact';
+    if (s.includes('levant') || s.includes('análise') || s.includes('analise')) return 'badge-survey';
+    return 'badge-analysis';
   },
 
-  load(data){
-    this.data=data;const u=data.user,d=data.dashboard;
-    document.getElementById('greetingName').textContent='Olá, '+u.name.split(' ')[0]+'!';
-    document.getElementById('greetingCompany').textContent=u.company;
-    const icons=[
-      {c:'blue',svg:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',v:d.totalIndications,l:'Indicações'},
-      {c:'orange',svg:'<rect x="2" y="3" width="18" height="18" rx="3"/><path d="M8 7h8M8 11h5"/>',v:d.totalOpportunities,l:'Oportunidades'},
-      {c:'green',svg:'<path d="M12 1v4M12 17v4M4.22 4.22l2.83 2.83M14.95 14.95l2.83 2.83M1 12h4M17 12h4M4.22 19.78l2.83-2.83M14.95 7.05l2.83-2.83"/>',v:this.cur(d.totalOpportunityValue),l:'Valor total'},
-      {c:'green',svg:'<polyline points="20 6 9 17 4 12"/>',v:d.acceptedOpportunities,l:'Adquiridas'},
-      {c:'yellow',svg:'<circle cx="11" cy="11" r="10"/><path d="M11 6v5l3 3"/>',v:d.pendingOpportunities,l:'Em andamento'}
+  navigate(p) {
+    this.currentPage = p;
+    document.querySelectorAll('.page').forEach(x => x.classList.remove('visible'));
+    const map = { home:'pageHome', indications:'pageIndications', opportunities:'pageOpportunities', reports:'pageReports' };
+    document.getElementById(map[p]).classList.add('visible');
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.page === p));
+    window.scrollTo({ top:0, behavior:'smooth' });
+    if (p === 'indications') this.renderAllInd();
+    if (p === 'opportunities') this.renderAllOpp();
+    if (p === 'reports') this.renderReports();
+  },
+
+  load(data) {
+    this.data = data;
+    const u = data.user, d = data.dashboard;
+    document.getElementById('greetingName').textContent = 'Olá, ' + u.name.split(' ')[0] + '!';
+    document.getElementById('greetingCompany').textContent = u.company;
+    this.renderRefer(u.refCode);
+    const icons = [
+      { c:'blue', svg:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>', v:d.totalIndications, l:'Indicações' },
+      { c:'orange', svg:'<rect x="2" y="3" width="18" height="18" rx="3"/><path d="M8 7h8M8 11h5"/>', v:d.totalOpportunities, l:'Oportunidades' },
+      { c:'green', svg:'<path d="M12 1v4M12 17v4M4.22 4.22l2.83 2.83M14.95 14.95l2.83 2.83M1 12h4M17 12h4M4.22 19.78l2.83-2.83M14.95 7.05l2.83-2.83"/>', v:this.cur(d.totalOpportunityValue), l:'Valor total' },
+      { c:'green', svg:'<polyline points="20 6 9 17 4 12"/>', v:d.acceptedOpportunities, l:'Adquiridas' },
+      { c:'yellow', svg:'<circle cx="11" cy="11" r="10"/><path d="M11 6v5l3 3"/>', v:d.pendingOpportunities, l:'Em andamento' }
     ];
-    document.getElementById('summaryGrid').innerHTML=icons.map((c,i)=>`<div class="summary-card animate delay-${i+1}"><div class="summary-icon ${c.c}"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${c.svg}</svg></div><div class="summary-info"><h3>${c.v}</h3><p>${c.l}</p></div></div>`).join('');
-    this.renderHomeInd();this.renderHomeOpp();
+    document.getElementById('summaryGrid').innerHTML = icons.map((c,i) =>
+      `<div class="summary-card animate delay-${i+1}">
+        <div class="summary-icon ${c.c}"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${c.svg}</svg></div>
+        <div class="summary-info"><h3>${c.v}</h3><p>${c.l}</p></div>
+      </div>`
+    ).join('');
+    this.renderHomeInd();
+    this.renderHomeOpp();
   },
 
-  renderHomeInd(){document.getElementById('homeIndicacoes').innerHTML=this.data.indications.slice(0,4).map((i,x)=>`<div class="card-item" onclick="App.showInd(${x})"><div class="card-avatar">${this.ini(i.company)}</div><div class="card-body"><h4>${i.company}</h4><p>${i.person} · ${i.segment} · ${i.city}</p></div><span class="card-chevron">›</span></div>`).join('')},
+  renderHomeInd() {
+    const list = this.data.indications.slice(0,4);
+    document.getElementById('homeIndicacoes').innerHTML = list.map((i, x) =>
+      `<div class="card-item" onclick="App.showInd(${x})">
+        <div class="card-avatar">${this.ini(i.company)}</div>
+        <div class="card-body"><h4>${i.company}</h4><p>${i.person} · ${i.segment} · ${i.city}</p></div>
+        <span class="card-chevron">›</span>
+      </div>`
+    ).join('');
+  },
 
-  renderHomeOpp(){let items=this.data.opportunities;if(this.homeFilter==='accepted')items=items.filter(o=>o.accepted);if(this.homeFilter==='pending')items=items.filter(o=>!o.accepted);document.getElementById('homeOpps').innerHTML=items.slice(0,6).map((o,x)=>this.oppHtml(o,x)).join('')},
+  renderHomeOpp() {
+    let items = this.data.opportunities;
+    if (this.homeFilter === 'accepted') items = items.filter(o => o.accepted);
+    if (this.homeFilter === 'pending') items = items.filter(o => !o.accepted);
+    items = items.slice(0,6);
+    document.getElementById('homeOpps').innerHTML = items.map((o, x) => this.oppHtml(o, x)).join('');
+  },
 
-  oppHtml(o,x){const v=o.accepted?`<span class="opp-value">${this.cur(o.value)}</span>`:`<span class="opp-value hidden-value">Valor não liberado</span>`;return`<div class="opp-card" onclick="App.showOpp(${x})"><div class="opp-top"><span class="opp-company">${o.company}</span><span class="badge ${this.bc(o.stage)}">${o.stage}</span></div><div class="opp-type">${o.type}</div><div class="opp-bottom">${v}</div></div>`},
+  oppHtml(o, x) {
+    const v = o.accepted ? `<span class="opp-value">${this.cur(o.value)}</span>` : `<span class="opp-value hidden-value">Valor não liberado</span>`;
+    return `<div class="opp-card" onclick="App.showOpp(${x})">
+      <div class="opp-top"><span class="opp-company">${o.company}</span><span class="badge ${this.bc(o.stage)}">${o.stage}</span></div>
+      <div class="opp-type">${o.type}</div>
+      <div class="opp-bottom">${v}</div>
+    </div>`;
+  },
 
-  renderAllInd(q){let items=this.data.indications;if(q){const s=q.toLowerCase();items=items.filter(i=>(i.company+i.person+i.segment+i.city).toLowerCase().includes(s))}document.getElementById('indCount').textContent=items.length+' indicações';document.getElementById('allIndicacoes').innerHTML=items.map((i,x)=>`<div class="card-item" onclick="App.showInd(${x})"><div class="card-avatar">${this.ini(i.company)}</div><div class="card-body"><h4>${i.company}</h4><p>${i.person} · ${i.segment} · ${i.city}</p></div><span class="card-chevron">›</span></div>`).join('')},
+  renderAllInd(q) {
+    let items = this.data.indications;
+    if (q) { const s = q.toLowerCase(); items = items.filter(i => (i.company+i.person+i.segment+i.city).toLowerCase().includes(s)); }
+    document.getElementById('indCount').textContent = items.length + ' indicações';
+    document.getElementById('allIndicacoes').innerHTML = items.map((i, x) =>
+      `<div class="card-item" onclick="App.showInd(${x})">
+        <div class="card-avatar">${this.ini(i.company)}</div>
+        <div class="card-body"><h4>${i.company}</h4><p>${i.person} · ${i.segment} · ${i.city}</p></div>
+        <span class="card-chevron">›</span>
+      </div>`
+    ).join('');
+  },
 
-  renderAllOpp(q){let items=this.data.opportunities;if(this.oppFilter==='accepted')items=items.filter(o=>o.accepted);if(this.oppFilter==='pending')items=items.filter(o=>!o.accepted);if(q){const s=q.toLowerCase();items=items.filter(o=>(o.company+o.type+o.stage).toLowerCase().includes(s))}document.getElementById('oppCount').textContent=items.length+' oportunidades';document.getElementById('allOpps').innerHTML=items.map((o,x)=>this.oppHtml(o,x)).join('')},
+  renderAllOpp(q) {
+    let items = this.data.opportunities;
+    if (this.oppFilter === 'accepted') items = items.filter(o => o.accepted);
+    if (this.oppFilter === 'pending') items = items.filter(o => !o.accepted);
+    if (q) { const s = q.toLowerCase(); items = items.filter(o => (o.company+o.type+o.stage).toLowerCase().includes(s)); }
+    document.getElementById('oppCount').textContent = items.length + ' oportunidades';
+    document.getElementById('allOpps').innerHTML = items.map((o, x) => this.oppHtml(o, x)).join('');
+  },
 
-  renderReports(){
-    const opps=this.data.opportunities,acc=opps.filter(o=>o.accepted);
-    const totVal=acc.reduce((s,o)=>s+o.value,0),avg=acc.length?totVal/acc.length:0;
-    const byType={},byStage={},bySeg={};
-    opps.forEach(o=>{byType[o.type]=(byType[o.type]||0)+1;byStage[o.stage]=(byStage[o.stage]||0)+1});
-    this.data.indications.forEach(i=>{bySeg[i.segment]=(bySeg[i.segment]||0)+1});
-    const mx=o=>Math.max(...Object.values(o));
-    const colors=['var(--blue-500)','var(--orange-500)','var(--green-500)','var(--yellow-500)','#7c3aed','#0284c7','var(--red-500)'];
-    const bars=(d,m)=>Object.entries(d).sort((a,b)=>b[1]-a[1]).map(([k,v],i)=>`<div class="report-bar"><span class="report-bar-label">${k}</span><div class="report-bar-track"><div class="report-bar-fill" style="width:${(v/m)*100}%;background:${colors[i%colors.length]}"></div></div><span class="report-bar-value">${v}</span></div>`).join('');
-    document.getElementById('reportGrid').innerHTML=`
+  renderReports() {
+    const opps = this.data.opportunities;
+    const acc = opps.filter(o => o.accepted);
+    const totVal = acc.reduce((s,o) => s + o.value, 0);
+    const avg = acc.length ? totVal / acc.length : 0;
+    const byType = {}, byStage = {}, bySeg = {};
+    opps.forEach(o => { byType[o.type] = (byType[o.type] || 0) + 1; byStage[o.stage] = (byStage[o.stage] || 0) + 1; });
+    this.data.indications.forEach(i => { bySeg[i.segment] = (bySeg[i.segment] || 0) + 1; });
+    const mx = o => Math.max(...Object.values(o));
+    const colors = ['var(--blue-500)','var(--orange-500)','var(--green-500)','var(--yellow-500)','#7c3aed','#0284c7','var(--red-500)'];
+    const bars = (d, m) => Object.entries(d).sort((a,b) => b[1]-a[1]).map(([k,v],i) =>
+      `<div class="report-bar"><span class="report-bar-label">${k}</span><div class="report-bar-track"><div class="report-bar-fill" style="width:${(v/m)*100}%;background:${colors[i%colors.length]}"></div></div><span class="report-bar-value">${v}</span></div>`
+    ).join('');
+    const dash = this.data.dashboard || {};
+    const pct = (this.data.user && this.data.user.comissaoPct) || 0;
+    document.getElementById('reportGrid').innerHTML = `
+      <div class="report-card"><h4>Suas Comissões (${pct}%)</h4><div class="report-big-number" style="color:var(--green-500)">${this.cur(dash.comissaoConfirmada || 0)}</div><div class="report-big-label" style="margin-bottom:12px">Confirmada · negócios fechados</div><div class="report-big-number" style="color:var(--orange-500)">${this.cur(dash.comissaoPrevista || 0)}</div><div class="report-big-label">Prevista · em andamento</div></div>
       <div class="report-card"><h4>Resumo Financeiro</h4><div class="report-big-number">${this.cur(totVal)}</div><div class="report-big-label" style="margin-bottom:12px">Valor total adquirido</div><div class="report-big-number">${this.cur(Math.round(avg))}</div><div class="report-big-label">Ticket médio</div></div>
       <div class="report-card"><h4>Taxa de Conversão</h4><div class="report-big-number">${Math.round((acc.length/opps.length)*100)}%</div><div class="report-big-label">${acc.length} de ${opps.length} oportunidades</div></div>
-      <div class="report-card"><h4>Por Tipo de Produto</h4>${bars(byType,mx(byType))}</div>
-      <div class="report-card"><h4>Por Estágio</h4>${bars(byStage,mx(byStage))}</div>
-      <div class="report-card"><h4>Indicações por Segmento</h4>${bars(bySeg,mx(bySeg))}</div>`;
+      <div class="report-card"><h4>Por Tipo de Produto</h4>${bars(byType, mx(byType))}</div>
+      <div class="report-card"><h4>Por Estágio</h4>${bars(byStage, mx(byStage))}</div>
+      <div class="report-card"><h4>Indicações por Segmento</h4>${bars(bySeg, mx(bySeg))}</div>
+    `;
   },
 
-  showInd(x){const i=this.data.indications[x];if(!i)return;document.getElementById('modalContent').innerHTML=`<div class="modal-handle"></div><button class="modal-close" onclick="App.closeModal()">✕</button><h3>${i.company}</h3><p class="modal-sub">${i.segment} · ${i.city}</p><div class="modal-row"><span class="modal-label">Contato</span><span class="modal-val">${i.person}</span></div><div class="modal-row"><span class="modal-label">Cargo</span><span class="modal-val">${i.position}</span></div><div class="modal-row"><span class="modal-label">Segmento</span><span class="modal-val">${i.segment}</span></div><div class="modal-row"><span class="modal-label">Cidade</span><span class="modal-val">${i.city}</span></div><div class="modal-row"><span class="modal-label">Interesse</span><span class="modal-val">${i.interest}</span></div>`;document.getElementById('modalOverlay').classList.add('show')},
+  showInd(x) {
+    const i = this.data.indications[x];
+    if (!i) return;
+    document.getElementById('modalContent').innerHTML = `
+      <div class="modal-handle"></div><button class="modal-close" onclick="App.closeModal()">✕</button>
+      <h3>${i.company}</h3><p class="modal-sub">${i.segment} · ${i.city}</p>
+      <div class="modal-row"><span class="modal-label">Contato</span><span class="modal-val">${i.person}</span></div>
+      <div class="modal-row"><span class="modal-label">Cargo</span><span class="modal-val">${i.position}</span></div>
+      <div class="modal-row"><span class="modal-label">Segmento</span><span class="modal-val">${i.segment}</span></div>
+      <div class="modal-row"><span class="modal-label">Cidade</span><span class="modal-val">${i.city}</span></div>
+      <div class="modal-row"><span class="modal-label">Interesse</span><span class="modal-val">${i.interest}</span></div>
+    `;
+    document.getElementById('modalOverlay').classList.add('show');
+  },
 
-  showOpp(x){const o=this.data.opportunities[x];if(!o)return;const v=o.accepted?this.cur(o.value):'Não liberado';document.getElementById('modalContent').innerHTML=`<div class="modal-handle"></div><button class="modal-close" onclick="App.closeModal()">✕</button><h3>${o.company}</h3><p class="modal-sub">${o.type}</p><div class="modal-row"><span class="modal-label">Estágio</span><span class="modal-val"><span class="badge ${this.bc(o.stage)}">${o.stage}</span></span></div><div class="modal-row"><span class="modal-label">Valor</span><span class="modal-val">${v}</span></div><div class="modal-row"><span class="modal-label">Status</span><span class="modal-val">${o.accepted?'✅ Adquirida':'⏳ Em andamento'}</span></div>`;document.getElementById('modalOverlay').classList.add('show')},
+  showOpp(x) {
+    const o = this.data.opportunities[x];
+    if (!o) return;
+    const v = o.accepted ? this.cur(o.value) : 'Não liberado';
+    document.getElementById('modalContent').innerHTML = `
+      <div class="modal-handle"></div><button class="modal-close" onclick="App.closeModal()">✕</button>
+      <h3>${o.company}</h3><p class="modal-sub">${o.type}</p>
+      <div class="modal-row"><span class="modal-label">Estágio</span><span class="modal-val"><span class="badge ${this.bc(o.stage)}">${o.stage}</span></span></div>
+      <div class="modal-row"><span class="modal-label">Valor</span><span class="modal-val">${v}</span></div>
+      <div class="modal-row"><span class="modal-label">Sua comissão (${o.comissaoPct}%)</span><span class="modal-val">${this.cur(o.comissaoValor || 0)} <span class="comm-badge ${o.comissaoStatus === 'Confirmada' ? 'comm-confirmed' : 'comm-pending'}">${o.comissaoStatus}</span></span></div>
+      <div class="modal-row"><span class="modal-label">Status</span><span class="modal-val">${o.accepted ? '✅ Adquirida' : '⏳ Em andamento'}</span></div>
+    `;
+    document.getElementById('modalOverlay').classList.add('show');
+  },
 
-  closeModal(){document.getElementById('modalOverlay').classList.remove('show')}
+  showIndicationForm() {
+    document.getElementById('modalContent').innerHTML = `
+      <div class="modal-handle"></div><button class="modal-close" onclick="App.closeModal()">✕</button>
+      <h3>Nova indicação</h3><p class="modal-sub">Indique uma empresa e acompanhe o andamento por aqui.</p>
+      <form id="indicationForm">
+        <div class="form-error" id="indFormError"></div>
+        <div class="form-field"><label>Empresa *</label><input name="company" required placeholder="Nome da empresa indicada"></div>
+        <div class="form-grid2">
+          <div class="form-field"><label>Contato *</label><input name="contactName" required placeholder="Nome do contato"></div>
+          <div class="form-field"><label>Cargo</label><input name="position" placeholder="Ex.: Gerente"></div>
+        </div>
+        <div class="form-grid2">
+          <div class="form-field"><label>E-mail *</label><input name="email" type="email" required placeholder="email@empresa.com"></div>
+          <div class="form-field"><label>Telefone *</label><input name="phone" required placeholder="(11) 90000-0000"></div>
+        </div>
+        <div class="form-grid2">
+          <div class="form-field"><label>Segmento *</label><input name="segment" required placeholder="Ex.: Bebidas"></div>
+          <div class="form-field"><label>Cidade</label><input name="city" placeholder="Cidade - UF"></div>
+        </div>
+        <div class="form-field"><label>Interesse / Projeto *</label><input name="project" required placeholder="Ex.: Célula robotizada"></div>
+        <div class="form-field"><label>Valor estimado (R$)</label><input name="value" inputmode="decimal" placeholder="Ex.: 250.000,00"></div>
+        <div class="form-field"><label>Observações</label><textarea name="notes" rows="2" placeholder="Detalhes úteis para o time comercial..."></textarea></div>
+        <button type="submit" class="btn-submit" id="indSubmit">Enviar indicação</button>
+      </form>`;
+    document.getElementById('modalOverlay').classList.add('show');
+  },
+
+  async submitIndication(form) {
+    const btn = document.getElementById('indSubmit');
+    const err = document.getElementById('indFormError');
+    err.classList.remove('show');
+    const payload = Object.fromEntries(new FormData(form).entries());
+    btn.disabled = true; btn.textContent = 'Enviando...';
+    try {
+      const data = await ApiService.createOpportunity(payload);
+      this.load(data);
+      this.navigate('indications');
+      this.closeModal();
+    } catch (e) {
+      err.textContent = e.message; err.classList.add('show');
+      btn.disabled = false; btn.textContent = 'Enviar indicação';
+    }
+  },
+
+  renderRefer(refCode) {
+    const card = document.getElementById('referCard');
+    if (!refCode) { card.style.display = 'none'; return; }
+    const base = window.__REFER_BASE__ || location.origin;
+    const url = base + '/r/' + refCode;
+    document.getElementById('referLink').value = url;
+    document.getElementById('referQr').src =
+      'https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=0&color=1e1b4b&data=' + encodeURIComponent(url);
+    card.style.display = '';
+  },
+
+  closeModal() {
+    document.getElementById('modalOverlay').classList.remove('show');
+  }
 };
 
-// INIT
-document.getElementById('btnLogin').addEventListener('click',doLogin);
-document.getElementById('loginUser').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('loginPass').focus()});
-document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
-document.getElementById('togglePass').addEventListener('click',()=>{const p=document.getElementById('loginPass');p.type=p.type==='password'?'text':'password'});
-
-async function doLogin(){
-  const u=document.getElementById('loginUser').value.trim(),p=document.getElementById('loginPass').value.trim(),btn=document.getElementById('btnLogin'),err=document.getElementById('loginError');
-  err.classList.remove('show');document.getElementById('loginUser').classList.remove('error');document.getElementById('loginPass').classList.remove('error');
-  if(!u||!p){document.getElementById('loginErrorMsg').textContent='Preencha usuário e senha';err.classList.add('show');if(!u)document.getElementById('loginUser').classList.add('error');if(!p)document.getElementById('loginPass').classList.add('error');return}
-  btn.classList.add('loading');btn.disabled=true;
-  try{
-    const data = await ApiService.login(u,p);
-    // /auth já devolve user + dashboard + indications + opportunities
-    if(!data.indications)   data.indications=[];
-    if(!data.opportunities) data.opportunities=[];
-    if(!data.dashboard)     data.dashboard={totalIndications:data.indications.length,totalOpportunities:data.opportunities.length,totalOpportunityValue:0,acceptedOpportunities:0,pendingOpportunities:data.opportunities.length};
-    document.getElementById('loginScreen').style.display='none';
-    document.getElementById('appShell').style.display='block';
-    document.getElementById('bottomNav').classList.add('visible');
-    document.body.style.paddingBottom='64px';
-    App.load(data);
-  }catch(error){
-    document.getElementById('loginErrorMsg').textContent=error.message;err.classList.add('show');
-  }finally{btn.classList.remove('loading');btn.disabled=false}
-}
-
-document.getElementById('btnLogout').addEventListener('click',()=>{
-  ApiService.logout();
-  document.getElementById('appShell').style.display='none';document.getElementById('bottomNav').classList.remove('visible');
-  document.body.style.paddingBottom='0';document.getElementById('loginScreen').style.display='flex';document.getElementById('loginPass').value='';App.data=null;
+// --- Eventos e inicialização ---
+document.getElementById('btnLogin').addEventListener('click', doLogin);
+document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
+document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+document.getElementById('togglePass').addEventListener('click', () => {
+  const p = document.getElementById('loginPass');
+  p.type = p.type === 'password' ? 'text' : 'password';
 });
 
-document.querySelectorAll('.nav-item').forEach(n=>n.addEventListener('click',()=>App.navigate(n.dataset.page)));
-document.querySelectorAll('#homeTabs .tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('#homeTabs .tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');App.homeFilter=t.dataset.filter;App.renderHomeOpp()}));
-document.querySelectorAll('#oppTabs .tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('#oppTabs .tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');App.oppFilter=t.dataset.filter;App.renderAllOpp(document.getElementById('oppSearch').value)}));
-document.getElementById('indSearch').addEventListener('input',e=>App.renderAllInd(e.target.value));
-document.getElementById('oppSearch').addEventListener('input',e=>App.renderAllOpp(e.target.value));
-document.getElementById('modalOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)App.closeModal()});
+let authMode = 'login';
+
+function setAuthMode(mode) {
+  authMode = mode;
+  const isSignup = mode === 'signup';
+  document.querySelectorAll('.signup-only').forEach(el => { el.style.display = isSignup ? 'block' : 'none'; });
+  document.querySelector('#btnLogin .btn-text').textContent = isSignup ? 'Criar conta' : 'Entrar';
+  document.getElementById('loginSubtitle').textContent = isSignup ? 'Crie sua conta de parceiro' : 'Acesse sua conta para continuar';
+  document.getElementById('switchText').textContent = isSignup ? 'Já tem conta?' : 'Ainda não é parceiro?';
+  document.getElementById('switchLink').textContent = isSignup ? 'Fazer login' : 'Criar conta';
+  document.getElementById('loginError').classList.remove('show');
+}
+
+document.getElementById('switchLink').addEventListener('click', () => setAuthMode(authMode === 'login' ? 'signup' : 'login'));
+
+function enterApp(data) {
+  if (!data.indications) data.indications = [];
+  if (!data.opportunities) data.opportunities = [];
+  if (!data.dashboard) data.dashboard = { totalIndications: data.indications.length, totalOpportunities: data.opportunities.length, totalOpportunityValue: 0, acceptedOpportunities: 0, pendingOpportunities: data.opportunities.length };
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('appShell').style.display = 'block';
+  document.getElementById('bottomNav').classList.add('visible');
+  document.getElementById('btnNewIndication').classList.add('visible');
+  document.body.style.paddingBottom = '64px';
+  App.load(data);
+}
+
+async function doLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value.trim();
+  const btn = document.getElementById('btnLogin');
+  const err = document.getElementById('loginError');
+  err.classList.remove('show');
+  document.getElementById('loginUser').classList.remove('error');
+  document.getElementById('loginPass').classList.remove('error');
+  if (!u || !p) {
+    document.getElementById('loginErrorMsg').textContent = 'Preencha e-mail e senha';
+    err.classList.add('show');
+    if (!u) document.getElementById('loginUser').classList.add('error');
+    if (!p) document.getElementById('loginPass').classList.add('error');
+    return;
+  }
+  btn.classList.add('loading');
+  btn.disabled = true;
+  try {
+    let data;
+    if (authMode === 'signup') {
+      const nome = document.getElementById('signName').value.trim();
+      const empresa = document.getElementById('signCompany').value.trim();
+      const telefone = document.getElementById('signPhone').value.trim();
+      if (!nome) throw new Error('Informe seu nome completo.');
+      data = await ApiService.signup({ nome, empresa, telefone, email: u, senha: p });
+    } else {
+      data = await ApiService.login(u, p);
+    }
+    enterApp(data);
+  } catch (error) {
+    document.getElementById('loginErrorMsg').textContent = error.message;
+    err.classList.add('show');
+  } finally {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }
+}
+
+document.getElementById('btnLogout').addEventListener('click', () => {
+  ApiService.logout();
+  document.getElementById('appShell').style.display = 'none';
+  document.getElementById('bottomNav').classList.remove('visible');
+  document.getElementById('btnNewIndication').classList.remove('visible');
+  document.body.style.paddingBottom = '0';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('loginPass').value = '';
+  App.data = null;
+});
+
+document.getElementById('btnNewIndication').addEventListener('click', () => App.showIndicationForm());
+document.getElementById('modalContent').addEventListener('submit', e => {
+  if (e.target && e.target.id === 'indicationForm') {
+    e.preventDefault();
+    App.submitIndication(e.target);
+  }
+});
+document.querySelectorAll('.nav-item').forEach(n => n.addEventListener('click', () => App.navigate(n.dataset.page)));
+document.querySelectorAll('#homeTabs .tab').forEach(t => t.addEventListener('click', () => {
+  document.querySelectorAll('#homeTabs .tab').forEach(x => x.classList.remove('active'));
+  t.classList.add('active');
+  App.homeFilter = t.dataset.filter;
+  App.renderHomeOpp();
+}));
+document.querySelectorAll('#oppTabs .tab').forEach(t => t.addEventListener('click', () => {
+  document.querySelectorAll('#oppTabs .tab').forEach(x => x.classList.remove('active'));
+  t.classList.add('active');
+  App.oppFilter = t.dataset.filter;
+  App.renderAllOpp(document.getElementById('oppSearch').value);
+}));
+document.getElementById('indSearch').addEventListener('input', e => App.renderAllInd(e.target.value));
+document.getElementById('oppSearch').addEventListener('input', e => App.renderAllOpp(e.target.value));
+document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) App.closeModal(); });
+
+document.getElementById('referCopy').addEventListener('click', async () => {
+  const input = document.getElementById('referLink');
+  const btn = document.getElementById('referCopy');
+  try { await navigator.clipboard.writeText(input.value); }
+  catch { input.select(); document.execCommand('copy'); }
+  const t = btn.textContent; btn.textContent = 'Copiado!'; setTimeout(() => btn.textContent = t, 1600);
+});
+
+document.getElementById('referShare').addEventListener('click', async () => {
+  const url = document.getElementById('referLink').value;
+  const data = { title: 'IndustriAlly', text: 'Indique sua empresa para a IndustriAlly e receba o contato do nosso time:', url };
+  if (navigator.share) { try { await navigator.share(data); } catch (e) {} }
+  else { document.getElementById('referCopy').click(); }
+});
+
 </script>
 </body>
 </html>

@@ -1,0 +1,18 @@
+# Dependências
+node_modules/
+
+# Dados mutáveis — gerados pelo `npm run seed` e preenchidos em produção.
+# Ficam FORA do git: contêm leads reais (nome/e-mail/telefone) — LGPD.
+clientes.json
+parceiros.json
+
+# Legado do protótipo (não usado pela versão atual)
+dados.json
+partner.json
+oportunidade.json
+oportunidades.json
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+*.log

@@ -1,452 +1,2709 @@
-﻿<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CRM Simples</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#F8FAFC" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <title>IndustriAlly | Monetize suas visitas industriais</title>
+  <meta name="description" content="Transforme visitas em indústrias em renda recorrente. Você indica oportunidades e a IndustriAlly executa o projeto completo." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Você já entra nessas empresas. Falta só monetizar isso." />
+  <meta property="og:description" content="Landing page premium para representantes, distribuidores e vendedores industriais." />
+  <meta property="og:locale" content="pt_BR" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "IndustriAlly",
+        "url": "https://celiware.com.br",
+        "description": "Programa de parceiros para representantes e vendedores industriais monetizarem oportunidades de automação."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Quem fica com a empresa indicada?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A primeira indicação válida e aprovada fica registrada no parceiro que cadastrou primeiro." }
+          },
+          {
+            "@type": "Question",
+            "name": "Preciso negociar ou fazer proposta?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Não. A IndustriAlly assume engenharia, proposta, negociação, execução e suporte." }
+          },
+          {
+            "@type": "Question",
+            "name": "Tem custo para participar?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Não. Sem taxa de entrada e sem mensalidade." }
+          },
+          {
+            "@type": "Question",
+            "name": "Posso acompanhar o andamento?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Sim. O portal permite acompanhar o status das indicações e comissões." }
+          },
+          {
+            "@type": "Question",
+            "name": "Quanto tempo recebo comissão?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Até cinco anos, conforme regras do programa." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ===== RESET E VARIÁVEIS ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Cores principais - Tema Claro Refinado */
+      --bg-primary: #F8FAFC;
+      --bg-secondary: #F1F5F9;
+      --bg-tertiary: #E8EDF5;
+      
+      --surface: rgba(255, 255, 255, 0.7);
+      --surface-hover: rgba(255, 255, 255, 0.9);
+      --surface-glass: rgba(255, 255, 255, 0.5);
+      
+      --border-subtle: rgba(15, 23, 42, 0.06);
+      --border-medium: rgba(15, 23, 42, 0.1);
+      --border-strong: rgba(108, 99, 255, 0.25);
+      --border-glow: rgba(108, 99, 255, 0.08);
+      
+      --text-primary: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+      --text-dim: #94A3B8;
+      
+      /* Gradientes refinados para tema claro */
+      --gradient-primary: linear-gradient(135deg, #6C63FF 0%, #4F46E5 50%, #3B82F6 100%);
+      --gradient-accent: linear-gradient(135deg, #10B981 0%, #059669 50%, #34D399 100%);
+      --gradient-warning: linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #FBBF24 100%);
+      --gradient-danger: linear-gradient(135deg, #EF4444 0%, #DC2626 50%, #F87171 100%);
+      
+      --gradient-hero: linear-gradient(135deg, rgba(108, 99, 255, 0.06) 0%, rgba(16, 185, 129, 0.04) 100%);
+      --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
+      --gradient-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%, rgba(255, 255, 255, 0.1) 100%);
+      
+      /* Sombras - Mais sutis para tema claro */
+      --shadow-card: 0 4px 24px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-card-hover: 0 12px 48px rgba(15, 23, 42, 0.08), 0 4px 16px rgba(15, 23, 42, 0.04);
+      --shadow-glow-primary: 0 8px 32px rgba(108, 99, 255, 0.2), 0 0 60px rgba(108, 99, 255, 0.05);
+      --shadow-glow-accent: 0 8px 32px rgba(16, 185, 129, 0.2), 0 0 60px rgba(16, 185, 129, 0.05);
+      --shadow-soft: 0 2px 12px rgba(15, 23, 42, 0.04);
+      
+      /* Glassmorphism claro */
+      --glass-bg: rgba(255, 255, 255, 0.6);
+      --glass-border: rgba(15, 23, 42, 0.06);
+      --glass-blur: blur(16px);
+      
+      /* Espaçamentos */
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --radius-full: 9999px;
+      
+      --container: 1200px;
+      --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ===== FUNDO ANIMADO ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(108, 99, 255, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(16, 185, 129, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(59, 130, 246, 0.02) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== PARTICULAS SUTIS ===== */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(2px 2px at 20% 30%, rgba(15, 23, 42, 0.04), transparent),
+        radial-gradient(2px 2px at 40% 70%, rgba(15, 23, 42, 0.03), transparent),
+        radial-gradient(2px 2px at 60% 20%, rgba(15, 23, 42, 0.02), transparent),
+        radial-gradient(2px 2px at 80% 80%, rgba(15, 23, 42, 0.03), transparent),
+        radial-gradient(1px 1px at 10% 90%, rgba(15, 23, 42, 0.02), transparent),
+        radial-gradient(1px 1px at 90% 10%, rgba(15, 23, 42, 0.02), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== UTILITÁRIOS ===== */
+    .container {
+      width: min(var(--container), 100% - 32px);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.04), transparent);
+    }
+
+    .section:last-child::after {
+      display: none;
+    }
+
+    .grid {
+      display: grid;
+      gap: 24px;
+    }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+
+    .text-center { text-align: center; }
+    .text-muted { color: var(--text-muted); }
+    .text-secondary { color: var(--text-secondary); }
+    .text-accent { color: #10B981; }
+    .text-warning { color: #F59E0B; }
+    .text-danger { color: #EF4444; }
+
+    .mt-8 { margin-top: 8px; }
+    .mt-12 { margin-top: 12px; }
+    .mt-16 { margin-top: 16px; }
+    .mt-24 { margin-top: 24px; }
+    .mt-32 { margin-top: 32px; }
+    .mb-16 { margin-bottom: 16px; }
+
+    /* ===== REVEAL ANIMATION ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ===== PROGRESS BAR ===== */
+    #progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0;
+      z-index: 999;
+      background: var(--gradient-primary);
+      box-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
+      transition: width 0.1s ease;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--gradient-primary);
+      border-radius: var(--radius-full);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--gradient-accent);
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      background: rgba(248, 250, 252, 0.85);
+      border-bottom: 1px solid var(--glass-border);
+      transition: all var(--transition);
+    }
+
+    .header.scrolled {
+      background: rgba(248, 250, 252, 0.95);
+      box-shadow: 0 4px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-primary);
+      border-radius: var(--radius-sm);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 800;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow-glow-primary);
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-icon::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.2) 50%, transparent 60%);
+      animation: shine 6s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 1rem;
+      line-height: 1.2;
+      color: var(--text-primary);
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .brand-text small {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: all var(--transition);
+      position: relative;
+      font-weight: 500;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: width var(--transition);
+      border-radius: var(--radius-full);
+    }
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+    }
+
+    /* ===== BOTÕES ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 32px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: inherit;
+      line-height: 1.2;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.01em;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition);
+      pointer-events: none;
+    }
+
+    .btn:hover::after {
+      opacity: 1;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: var(--shadow-glow-primary);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 48px rgba(108, 99, 255, 0.3);
+    }
+
+    .btn-accent {
+      background: var(--gradient-accent);
+      color: white;
+      box-shadow: var(--shadow-glow-accent);
+    }
+    .btn-accent:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 48px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-warning {
+      background: var(--gradient-warning);
+      color: white;
+      box-shadow: 0 8px 32px rgba(245, 158, 11, 0.2);
+    }
+    .btn-warning:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 48px rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-ghost {
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: var(--glass-blur);
+    }
+    .btn-ghost:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+      background: var(--surface);
+    }
+
+    .btn-lg {
+      padding: 16px 40px;
+      font-size: 1rem;
+    }
+
+    .btn-block {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--gradient-card);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    /* ===== BORDA COM LUZ QUE ANDA ===== */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: conic-gradient(
+        from var(--angle, 0deg),
+        transparent 0%,
+        rgba(108, 99, 255, 0.1) 15%,
+        rgba(108, 99, 255, 0.3) 30%,
+        rgba(16, 185, 129, 0.3) 50%,
+        rgba(108, 99, 255, 0.3) 70%,
+        rgba(108, 99, 255, 0.1) 85%,
+        transparent 100%
+      );
+      border-radius: var(--radius-lg);
+      z-index: -1;
+      animation: border-glow 4s linear infinite;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-shine);
+      opacity: 0;
+      transition: opacity var(--transition);
+      pointer-events: none;
+      border-radius: var(--radius-lg);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    @keyframes border-glow {
+      0% { --angle: 0deg; }
+      100% { --angle: 360deg; }
+    }
+
+    .card:hover {
+      border-color: transparent;
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card-hover), 0 0 40px rgba(108, 99, 255, 0.05);
+      background: var(--surface);
+    }
+
+    .card .icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(108, 99, 255, 0.08);
+      border-radius: var(--radius-md);
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      color: #6C63FF;
+      font-size: 1.5rem;
+      border: 1px solid rgba(108, 99, 255, 0.1);
+      transition: all var(--transition);
+    }
+
+    .card:hover .icon {
+      background: rgba(108, 99, 255, 0.12);
+      border-color: rgba(108, 99, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .card-highlight {
+      border: 2px solid transparent;
+      background: var(--gradient-card);
+      box-shadow: var(--shadow-card), 0 0 30px rgba(108, 99, 255, 0.04);
+    }
+    .card-highlight::before {
+      opacity: 0.6;
+    }
+    .card-highlight:hover {
+      border-color: transparent;
+      box-shadow: var(--shadow-card-hover), 0 0 60px rgba(108, 99, 255, 0.08);
+    }
+
+    .card-success {
+      border: 1px solid rgba(16, 185, 129, 0.15);
+    }
+    .card-success:hover {
+      border-color: transparent;
+    }
+
+    /* ===== EYEBROW ===== */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(108, 99, 255, 0.06);
+      border: 1px solid rgba(108, 99, 255, 0.1);
+      border-radius: var(--radius-full);
+      padding: 6px 18px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      backdrop-filter: var(--glass-blur);
+      position: relative;
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10B981;
+      display: inline-block;
+      animation: pulse-dot 2s ease-in-out infinite;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .eyebrow-warning {
+      background: rgba(245, 158, 11, 0.06);
+      border-color: rgba(245, 158, 11, 0.1);
+    }
+
+    /* ===== HEAD ===== */
+    .head {
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .head h2 {
+      margin-top: 16px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .head p {
+      margin-top: 12px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .head.text-center p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 60px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(108, 99, 255, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+      animation: hero-float 20s ease-in-out infinite;
+    }
+
+    @keyframes hero-float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-30px, 30px); }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-top: 16px;
+      color: var(--text-primary);
+    }
+    .hero h1 .highlight {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--text-secondary);
+      font-size: 1.15rem;
+      max-width: 56ch;
+      margin-top: 20px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .hero-note {
+      margin-top: 20px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .hero-note span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-note span::before {
+      content: '✓';
+      color: #10B981;
+      font-weight: 700;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--glass-border);
+    }
+    .hero-stats strong {
+      display: block;
+      font-size: 2rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .hero-stats span {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* Hero Media */
+    .hero-media {
+      background: var(--gradient-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: var(--glass-blur);
+      box-shadow: var(--shadow-card);
+      background-image: 
+        radial-gradient(circle at 30% 40%, rgba(108, 99, 255, 0.04) 0%, transparent 60%),
+        radial-gradient(circle at 70% 60%, rgba(16, 185, 129, 0.03) 0%, transparent 60%);
+    }
+
+    .hero-media::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: conic-gradient(
+        from var(--angle, 0deg),
+        transparent 0%,
+        rgba(108, 99, 255, 0.05) 15%,
+        rgba(108, 99, 255, 0.15) 30%,
+        rgba(16, 185, 129, 0.15) 50%,
+        rgba(108, 99, 255, 0.15) 70%,
+        rgba(108, 99, 255, 0.05) 85%,
+        transparent 100%
+      );
+      border-radius: var(--radius-xl);
+      z-index: 0;
+      animation: border-glow 6s linear infinite;
+    }
+
+    .hero-media .placeholder-icon {
+      font-size: 4.5rem;
+      margin-bottom: 20px;
+      opacity: 0.7;
+      position: relative;
+      z-index: 1;
+      animation: icon-float 4s ease-in-out infinite;
+    }
+
+    @keyframes icon-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero-media .placeholder-text {
+      color: var(--text-muted);
+      max-width: 30ch;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-media .placeholder-text strong {
+      color: var(--text-secondary);
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .hero-media-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(248, 250, 252, 0.9);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-full);
+      padding: 6px 16px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      z-index: 1;
+    }
+
+    /* ===== IMAGENS DO SISTEMA ===== */
+    .system-images {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .system-image-card {
+      background: var(--gradient-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--transition);
+      backdrop-filter: var(--glass-blur);
+      box-shadow: var(--shadow-card);
+      position: relative;
+    }
+
+    .system-image-card::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: conic-gradient(
+        from var(--angle, 0deg),
+        transparent 0%,
+        rgba(108, 99, 255, 0.05) 15%,
+        rgba(108, 99, 255, 0.12) 30%,
+        rgba(16, 185, 129, 0.12) 50%,
+        rgba(108, 99, 255, 0.12) 70%,
+        rgba(108, 99, 255, 0.05) 85%,
+        transparent 100%
+      );
+      border-radius: var(--radius-lg);
+      z-index: -1;
+      animation: border-glow 5s linear infinite;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .system-image-card:hover::before {
+      opacity: 1;
+    }
+
+    .system-image-card:hover {
+      border-color: transparent;
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-card-hover), 0 0 40px rgba(108, 99, 255, 0.04);
+    }
+
+    .system-image-card .image-placeholder {
+      height: 200px;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--glass-border);
+      position: relative;
+      overflow: hidden;
+    }
+    .system-image-card .image-placeholder .mockup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .system-image-card .image-placeholder .mockup .bar {
+      width: 80%;
+      height: 6px;
+      background: var(--glass-border);
+      border-radius: 4px;
+    }
+    .system-image-card .image-placeholder .mockup .bar:nth-child(2) {
+      width: 60%;
+    }
+    .system-image-card .image-placeholder .mockup .bar:nth-child(3) {
+      width: 70%;
+    }
+    .system-image-card .image-placeholder .mockup .bar.highlight {
+      background: var(--gradient-primary);
+      width: 50%;
+    }
+    .system-image-card .image-placeholder .badge-print {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(248, 250, 252, 0.9);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-full);
+      padding: 4px 12px;
+      font-size: 0.6rem;
+      color: var(--text-muted);
+    }
+    .system-image-card .card-body {
+      padding: 20px 24px 24px;
+    }
+    .system-image-card .card-body h4 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .system-image-card .card-body p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    /* ===== PROBLEMA (Viveu) ===== */
+    .lived-highlight {
+      margin-top: 32px;
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      border-radius: var(--radius-lg);
+      padding: 32px 40px;
+      background: rgba(16, 185, 129, 0.03);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      backdrop-filter: var(--glass-blur);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lived-highlight::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: conic-gradient(
+        from var(--angle, 0deg),
+        transparent 0%,
+        rgba(16, 185, 129, 0.05) 15%,
+        rgba(16, 185, 129, 0.15) 30%,
+        rgba(108, 99, 255, 0.15) 50%,
+        rgba(16, 185, 129, 0.15) 70%,
+        rgba(16, 185, 129, 0.05) 85%,
+        transparent 100%
+      );
+      border-radius: var(--radius-lg);
+      z-index: 0;
+      animation: border-glow 4s linear infinite;
+    }
+
+    .lived-highlight .big {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 600;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+    .lived-highlight .big .highlight {
+      color: #10B981;
+    }
+    .lived-highlight .zero-box {
+      background: rgba(239, 68, 68, 0.04);
+      border: 1px solid rgba(239, 68, 68, 0.1);
+      border-radius: var(--radius-md);
+      padding: 16px 28px;
+      text-align: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .lived-highlight .zero-box strong {
+      display: block;
+      font-size: 2rem;
+      color: #EF4444;
+      font-weight: 800;
+    }
+    .lived-highlight .zero-box span {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* ===== BENEFÍCIOS PRINCIPAIS ===== */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .benefit-card {
+      text-align: center;
+      padding: 40px 28px;
+    }
+    .benefit-card .icon-big {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .benefit-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+    .benefit-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .benefit-card p strong {
+      color: var(--text-secondary);
+    }
+
+    /* ===== FLUXO ===== */
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .flow-step {
+      position: relative;
+      text-align: center;
+    }
+    .flow-step .step-number {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      color: white;
+      font-weight: 700;
+      font-size: 0.85rem;
+      line-height: 36px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-glow-primary);
+      position: relative;
+    }
+    .flow-step h4 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .flow-step p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: calc(100% - 8px);
+      width: 16px;
+      height: 2px;
+      background: var(--gradient-primary);
+      opacity: 0.2;
+    }
+
+    /* ===== TABELA ===== */
+    .table-wrap {
+      overflow-x: auto;
+      background: var(--gradient-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: var(--glass-blur);
+      box-shadow: var(--shadow-card);
+      position: relative;
+    }
+
+    .table-wrap::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: conic-gradient(
+        from var(--angle, 0deg),
+        transparent 0%,
+        rgba(108, 99, 255, 0.03) 15%,
+        rgba(108, 99, 255, 0.08) 30%,
+        rgba(16, 185, 129, 0.08) 50%,
+        rgba(108, 99, 255, 0.08) 70%,
+        rgba(108, 99, 255, 0.03) 85%,
+        transparent 100%
+      );
+      border-radius: var(--radius-lg);
+      z-index: -1;
+      animation: border-glow 5s linear infinite;
+      opacity: 0.5;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 500px;
+    }
+    th, td {
+      padding: 16px 24px;
+      text-align: left;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    th {
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    td {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:hover td {
+      background: rgba(108, 99, 255, 0.02);
+    }
+
+    /* ===== ANTES/DEPOIS ===== */
+    .before-card {
+      border-color: rgba(239, 68, 68, 0.1);
+    }
+    .before-card::before {
+      background: conic-gradient(
+        from var(--angle, 0deg),
+        transparent 0%,
+        rgba(239, 68, 68, 0.05) 15%,
+        rgba(239, 68, 68, 0.12) 30%,
+        rgba(239, 68, 68, 0.12) 50%,
+        rgba(239, 68, 68, 0.05) 85%,
+        transparent 100%
+      );
+    }
+    .before-card:hover {
+      border-color: transparent;
+    }
+    .after-card {
+      border-color: rgba(16, 185, 129, 0.1);
+    }
+    .after-card::before {
+      background: conic-gradient(
+        from var(--angle, 0deg),
+        transparent 0%,
+        rgba(16, 185, 129, 0.05) 15%,
+        rgba(16, 185, 129, 0.12) 30%,
+        rgba(16, 185, 129, 0.12) 50%,
+        rgba(16, 185, 129, 0.05) 85%,
+        transparent 100%
+      );
+    }
+    .after-card:hover {
+      border-color: transparent;
+    }
+
+    .ba-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 12px;
+    }
+    .ba-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--glass-border);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+    }
+    .ba-list li:last-child {
+      border-bottom: none;
+    }
+    .ba-list .icon-before { color: #EF4444; font-size: 1.1rem; }
+    .ba-list .icon-after { color: #10B981; font-size: 1.1rem; }
+
+    /* ===== PROVA SOCIAL ===== */
+    .stat-card {
+      text-align: center;
+      padding: 32px 20px;
+    }
+    .stat-card strong {
+      display: block;
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .stat-card span {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 8px;
+      display: block;
+    }
+
+    /* ===== TESTEMONIAL ===== */
+    .testimonial-card {
+      border-color: rgba(108, 99, 255, 0.06);
+    }
+    .testimonial-card p {
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .testimonial-card p::before {
+      content: '"';
+      color: #6C63FF;
+      font-size: 2rem;
+      opacity: 0.3;
+      margin-right: 4px;
+    }
+    .testimonial-card p::after {
+      content: '"';
+      color: #6C63FF;
+      font-size: 2rem;
+      opacity: 0.3;
+      margin-left: 4px;
+    }
+    .testimonial-card small {
+      display: block;
+      margin-top: 16px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* ===== GARANTIAS ADICIONAIS ===== */
+    .guarantee-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .guarantee-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 24px;
+      background: var(--gradient-card);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      transition: all var(--transition);
+      backdrop-filter: var(--glass-blur);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .guarantee-item::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: conic-gradient(
+        from var(--angle, 0deg),
+        transparent 0%,
+        rgba(108, 99, 255, 0.03) 15%,
+        rgba(108, 99, 255, 0.08) 30%,
+        rgba(16, 185, 129, 0.08) 50%,
+        rgba(108, 99, 255, 0.08) 70%,
+        rgba(108, 99, 255, 0.03) 85%,
+        transparent 100%
+      );
+      border-radius: var(--radius-md);
+      z-index: -1;
+      animation: border-glow 4s linear infinite;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .guarantee-item:hover::before {
+      opacity: 1;
+    }
+
+    .guarantee-item:hover {
+      border-color: transparent;
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .guarantee-item .icon-g {
+      font-size: 2rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .guarantee-item h4 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .guarantee-item p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    /* ===== CALCULADORA ===== */
+    .calc-field {
+      margin-top: 20px;
+    }
+    .calc-field label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .calc-field label strong {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+    .calc-field input[type="range"] {
+      width: 100%;
+      height: 4px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--glass-border);
+      border-radius: 4px;
+      outline: none;
+      transition: background var(--transition);
+    }
+    .calc-field input[type="range"]:hover {
+      background: rgba(108, 99, 255, 0.15);
+    }
+    .calc-field input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      cursor: pointer;
+      box-shadow: var(--shadow-glow-primary);
+      transition: all var(--transition);
+    }
+    .calc-field input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+    }
+    .calc-field input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      cursor: pointer;
+      border: none;
+      box-shadow: var(--shadow-glow-primary);
+    }
+    .calc-field select {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--bg-primary);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .calc-field select:focus {
+      outline: none;
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.06);
+    }
+
+    .calc-result {
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      background: rgba(16, 185, 129, 0.02);
+      backdrop-filter: var(--glass-blur);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .calc-result::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: conic-gradient(
+        from var(--angle, 0deg),
+        transparent 0%,
+        rgba(16, 185, 129, 0.03) 15%,
+        rgba(16, 185, 129, 0.08) 30%,
+        rgba(108, 99, 255, 0.08) 50%,
+        rgba(16, 185, 129, 0.08) 70%,
+        rgba(16, 185, 129, 0.03) 85%,
+        transparent 100%
+      );
+      border-radius: var(--radius-lg);
+      z-index: -1;
+      animation: border-glow 5s linear infinite;
+      opacity: 0.5;
+    }
+
+    .calc-result-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .calc-result-item:last-child {
+      border-bottom: none;
+    }
+    .calc-result-item span {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .calc-result-item strong {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .calc-result-item strong.accent {
+      color: #10B981;
+    }
+    .calc-small {
+      margin-top: 16px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-item {
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-btn {
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-weight: 600;
+      padding: 24px 0;
+      width: 100%;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all var(--transition);
+    }
+    .faq-btn:hover {
+      color: #6C63FF;
+    }
+    .faq-btn svg {
+      transition: transform var(--transition);
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+    .faq-btn:hover svg {
+      opacity: 1;
+    }
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition), padding var(--transition);
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-content {
+      max-height: 200px;
+      padding-bottom: 24px;
+    }
+    .faq-item.open .faq-btn svg {
+      transform: rotate(180deg);
+    }
+
+    /* ===== FORMULÁRIO ===== */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .form-group label {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px 16px;
+      background: var(--bg-primary);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: all var(--transition);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.06);
+    }
+    .form-group textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    .form-group .required {
+      color: #EF4444;
+    }
+
+    .form-status {
+      margin-top: 12px;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      display: none;
+    }
+    .form-status.success {
+      display: block;
+      background: rgba(16, 185, 129, 0.06);
+      border: 1px solid rgba(16, 185, 129, 0.12);
+      color: #10B981;
+    }
+    .form-status.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.06);
+      border: 1px solid rgba(239, 68, 68, 0.12);
+      color: #EF4444;
+    }
+
+    .form-fine {
+      margin-top: 16px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* ===== CTA FINAL ===== */
+    .final-cta {
+      background: var(--gradient-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      padding: 64px 56px;
+      text-align: center;
+      backdrop-filter: var(--glass-blur);
+      box-shadow: var(--shadow-card);
+      background-image: 
+        radial-gradient(circle at 30% 50%, rgba(108, 99, 255, 0.03) 0%, transparent 60%),
+        radial-gradient(circle at 70% 50%, rgba(16, 185, 129, 0.02) 0%, transparent 60%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: conic-gradient(
+        from var(--angle, 0deg),
+        transparent 0%,
+        rgba(108, 99, 255, 0.05) 15%,
+        rgba(108, 99, 255, 0.15) 30%,
+        rgba(16, 185, 129, 0.15) 50%,
+        rgba(108, 99, 255, 0.15) 70%,
+        rgba(108, 99, 255, 0.05) 85%,
+        transparent 100%
+      );
+      border-radius: var(--radius-xl);
+      z-index: 0;
+      animation: border-glow 6s linear infinite;
+    }
+
+    .final-cta::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-shine);
+      opacity: 0;
+      transition: opacity var(--transition);
+      pointer-events: none;
+      border-radius: var(--radius-xl);
+    }
+
+    .final-cta:hover::after {
+      opacity: 1;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      max-width: 16ch;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      color: var(--text-primary);
+    }
+    .final-cta h2 span {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .final-cta p {
+      color: var(--text-secondary);
+      max-width: 60ch;
+      margin: 16px auto 0;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+    .final-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      border-top: 1px solid var(--glass-border);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      position: relative;
+    }
+
+    /* ===== STICKY MOBILE ===== */
+    .sticky-mobile {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: rgba(248, 250, 252, 0.95);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border-top: 1px solid var(--glass-border);
+      padding: 12px 16px;
+    }
+    .sticky-mobile .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .grid-5 { grid-template-columns: repeat(3, 1fr); }
+      .flow-steps { grid-template-columns: repeat(3, 1fr); }
+      .flow-step:not(:last-child)::after { display: none; }
+      .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+      .system-images { grid-template-columns: repeat(2, 1fr); }
+      .guarantee-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 60px 0; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .grid-5 { grid-template-columns: 1fr 1fr; }
+      .flow-steps { grid-template-columns: 1fr 1fr; }
+      .benefit-grid { grid-template-columns: 1fr; }
+      .system-images { grid-template-columns: 1fr; }
+      
+      .nav-links a:not(.btn) { display: none; }
+      .nav-cta { display: none; }
+      
+      .hero-stats { flex-direction: column; gap: 16px; }
+      .lived-highlight { flex-direction: column; text-align: center; padding: 24px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .final-cta { padding: 40px 24px; }
+      
+      .sticky-mobile { display: block; }
+      body { padding-bottom: 80px; }
+    }
+
+    @media (max-width: 480px) {
+      .grid-5 { grid-template-columns: 1fr; }
+      .flow-steps { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero-stats { gap: 12px; }
+      .hero-stats strong { font-size: 1.5rem; }
+    }
+
+    /* ===== REDUZ MOTION ===== */
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+      .hero::before,
+      .hero-media::before,
+      .brand-icon::after,
+      .hero-media .placeholder-icon {
+        animation: none !important;
+      }
+      .card::before,
+      .system-image-card::before,
+      .lived-highlight::before,
+      .table-wrap::before,
+      .guarantee-item::before,
+      .calc-result::before,
+      .final-cta::before {
+        animation: none !important;
+        opacity: 0 !important;
+      }
+    }
+  </style>
 </head>
 <body>
-<section class="auth-screen" id="auth-screen">
-  <form class="login-panel" id="login-form">
-    <h1>CRM Celiware</h1>
-    <p>Acesse para carregar os dados protegidos pela API.</p>
-    <div class="login-error" id="login-error">Login ou senha inválidos.</div>
 
-    <div class="form-group">
-      <label>Login</label>
-      <input type="text" id="login-usuario" autocomplete="username" required />
-    </div>
-    <div class="form-group">
-      <label>Senha</label>
-      <input type="password" id="login-senha" autocomplete="current-password" required />
-    </div>
+  <!-- ===== PROGRESS BAR ===== -->
+  <div id="progress"></div>
 
-    <button class="btn btn-primary" type="submit" id="login-submit">Entrar</button>
-  </form>
-</section>
-
-<div class="layout auth-locked" id="app-layout">
-
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="logo">CRM<span>.</span></div>
-    <nav>
-      <a class="active" onclick="mudarAba('lista', this)">
-        <span class="icon">👥</span>
-        <span>Clientes</span>
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="top">
+    <div class="container nav">
+      <a href="#top" class="brand">
+        <span class="brand-text">
+          <strong>Industri<span style="color:#10B981">Ally</span></strong>
+          <small>Programa de Parceiros</small>
+        </span>
       </a>
-      <a onclick="mudarAba('kanban-novos', this)">
-        <span class="icon">N</span>
-        <span>Novos Leads</span>
-      </a>
-      <a onclick="mudarAba('kanban-ativos', this)">
-        <span class="icon">A</span>
-        <span>Clientes Ativos</span>
-      </a>
-      <a onclick="mudarAba('kanban-influenciadores', this)">
-        <span class="icon">I</span>
-        <span>Influenciadores</span>
-      </a>
-      <a onclick="mudarAba('dashboard', this)">
-        <span class="icon">D</span>
-        <span>Dashboard</span>
-      </a>
-      <a>
-        <span class="icon">⚙️</span>
-        <span>Configurações</span>
-      </a>
-    </nav>
-  </aside>
 
-  <!-- MAIN -->
-  <main class="main">
-
-    <!-- TOPBAR -->
-    <div class="topbar">
-      <h1 id="page-title">Gestão de Clientes</h1>
-      <div class="topbar-actions" id="topbar-actions">
-        <div class="pomodoro" id="pomodoro" aria-label="Timer Pomodoro">
-          <span class="pomodoro-label">Foco</span>
-          <select class="pomodoro-duration" id="pomodoro-duration" aria-label="Tempo do Pomodoro" onchange="alterarDuracaoPomodoro(this.value)">
-            <option value="5">5 min</option>
-            <option value="10">10 min</option>
-            <option value="15">15 min</option>
-            <option value="25" selected>25 min</option>
-            <option value="45">45 min</option>
-          </select>
-          <span class="pomodoro-time" id="pomodoro-time">25:00</span>
-          <button class="pomodoro-btn" id="pomodoro-toggle" type="button" onclick="togglePomodoro()">Iniciar</button>
-          <button class="pomodoro-reset" type="button" title="Reiniciar Pomodoro" onclick="resetPomodoro()">↺</button>
-        </div>
-        <button class="btn" style="background:#e0f2fe;color:#0284c7" onclick="exportarJSON()">
-          ⬇️ Exportar JSON
-        </button>
-        <button class="btn" style="background:#f1f5f9;color:#475569" onclick="logout()">Sair</button>
-        <button class="btn btn-primary" onclick="abrirModalNovo()">
-          ➕ Novo Cliente
-        </button>
-      </div>
+      <nav class="nav-links">
+        <a href="#como-funciona">Como Funciona</a>
+        <a href="#plataforma">Plataforma</a>
+        <a href="#calculadora">Calculadora</a>
+        <a href="#faq">FAQ</a>
+        <a href="#cadastro" class="btn btn-primary nav-cta">Quero Participar</a>
+      </nav>
     </div>
+  </header>
 
-    <!-- ABAS -->
-    <div class="tabs">
-      <button class="tab-btn active" id="tab-lista" onclick="mudarAba('lista', this)">Lista</button>
-      <button class="tab-btn" id="tab-kanban-novos" onclick="mudarAba('kanban-novos', this)">Novos Leads</button>
-      <button class="tab-btn" id="tab-kanban-ativos" onclick="mudarAba('kanban-ativos', this)">Clientes Ativos</button>
-      <button class="tab-btn" id="tab-kanban-influenciadores" onclick="mudarAba('kanban-influenciadores', this)">Influenciadores</button>
-      <button class="tab-btn" id="tab-dashboard" onclick="mudarAba('dashboard', this)">Dashboard</button>
-    </div>
+  <!-- ===== MAIN ===== -->
+  <main>
 
-    <!-- ===== VIEW: DASHBOARD ===== -->
-    <div class="view" id="view-dashboard">
-      <div class="dashboard-grid">
-        <div class="stat-card dashboard-card destaque">
-          <span class="label">Fechados no mês</span>
-          <span class="value" id="dash-valor-fechado">—</span>
+    <!-- ===== 1) HERO ===== -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <span class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Representantes, Distribuidores e Vendedores Industriais
+          </span>
+          <h1>
+            Você já entra nessas empresas.<br>
+            <span class="highlight">Falta só monetizar isso.</span>
+          </h1>
+          <p>
+            Você escuta sobre projetos, oportunidades e expansões todos os dias.
+            Agora, transforme essas conversas em uma <strong>renda recorrente</strong>
+            com a IndustriAlly.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#cadastro" class="btn btn-primary btn-lg">Quero começar agora</a>
+            <a href="#calculadora" class="btn btn-ghost btn-lg">Calcular potencial</a>
+          </div>
+
+          <div class="hero-note">
+            <span>Sem mensalidade</span>
+            <span>Sem custo de entrada</span>
+            <span>Sem meta obrigatória</span>
+          </div>
+
+          <div class="hero-stats">
+            <div>
+              <strong>R$ 0</strong>
+              <span>Entrada no programa</span>
+            </div>
+            <div>
+              <strong>R$ 2.000+</strong>
+              <span>Por indicação</span>
+            </div>
+            <div>
+              <strong>Até 5 anos</strong>
+              <span>Remuneração</span>
+            </div>
+          </div>
         </div>
-        <div class="stat-card dashboard-card">
-          <span class="label">Influenciadores conquistados</span>
-          <span class="value conquistado" id="dash-influenciadores">—</span>
+
+        <aside class="hero-media reveal reveal-delay-2">
+          <div class="placeholder-icon">🏭</div>
+          <div class="placeholder-text">
+            <strong>Seu ambiente de trabalho</strong>
+            <span>Você já está dentro das fábricas. Agora, monetize cada visita.</span>
+          </div>
+          <span class="hero-media-badge">📸 Substitua por imagem real</span>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== 2) IMAGENS DO SISTEMA (PLATAFORMA) ===== -->
+    <section class="section" id="plataforma">
+      <div class="container">
+        <div class="head reveal text-center">
+          <span class="eyebrow">Transparência Total</span>
+          <h2>Acompanhe tudo na plataforma</h2>
+          <p style="max-width: 60ch; margin-left: auto; margin-right: auto;">
+            Veja em tempo real o status das suas indicações, relacionamento com clientes e comissões.
+            Tudo transparente, organizado e acessível de qualquer lugar.
+          </p>
         </div>
-        <div class="stat-card dashboard-card">
-          <span class="label">Propostas abertas</span>
-          <span class="value proposta" id="dash-propostas">—</span>
+
+        <div class="system-images">
+          <div class="system-image-card reveal reveal-delay-1">
+            <div class="image-placeholder" style="height:auto;">
+              <img src="img/print-dashboard.png" alt="Dashboard do parceiro IndustriAlly" loading="lazy" style="width:100%;height:auto;display:block;">
+            </div>
+            <div class="card-body">
+              <h4>Seu painel + link exclusivo</h4>
+              <p>Link e QR de indicação no topo — compartilhe e capte. Abaixo, todas as oportunidades, valores e status num só lugar.</p>
+            </div>
+          </div>
+
+          <div class="system-image-card reveal reveal-delay-2">
+            <div class="image-placeholder" style="height:auto;">
+              <img src="img/print-nova.png" alt="Cadastro de nova indicação no IndustriAlly" loading="lazy" style="width:100%;height:auto;display:block;">
+            </div>
+            <div class="card-body">
+              <h4>Cadastre em segundos</h4>
+              <p>Indique uma empresa com poucos campos e acompanhe o andamento — sem planilha, sem burocracia.</p>
+            </div>
+          </div>
+
+          <div class="system-image-card reveal reveal-delay-3">
+            <div class="image-placeholder" style="height:auto;">
+              <img src="img/print-relatorios.png" alt="Relatórios e comissões do parceiro" loading="lazy" style="width:100%;height:auto;display:block;">
+            </div>
+            <div class="card-body">
+              <h4>Comissões e Relatórios</h4>
+              <p>Comissões previstas e confirmadas, taxa de conversão e desempenho por segmento — tudo transparente.</p>
+            </div>
+          </div>
         </div>
-        <div class="stat-card dashboard-card">
-          <span class="label">Valor em propostas</span>
-          <span class="value" id="dash-valor-propostas">—</span>
-        </div>
-        <div class="stat-card dashboard-card">
-          <span class="label">Follow-ups vencidos</span>
-          <span class="value vencido" id="dash-vencidos">—</span>
-        </div>
-        <div class="stat-card dashboard-card">
-          <span class="label">Follow-ups próximos</span>
-          <span class="value proximo" id="dash-proximos">—</span>
+
+        <div class="card card-success reveal" style="margin-top: 24px; text-align: center; border-color: var(--border-strong);">
+          <p style="font-weight: 600; color: var(--text-secondary);">
+            🔍 <strong>100% transparente</strong> — Você vê tudo: indicações, relacionamento com clientes e comissões
+          </p>
         </div>
       </div>
+    </section>
 
-      <div class="dashboard-panels">
-        <section class="dashboard-panel">
-          <h2>Panorama por Kanban</h2>
-          <div class="dashboard-list" id="dash-pipelines"></div>
-        </section>
-        <section class="dashboard-panel">
-          <h2>Oportunidades por responsável</h2>
-          <div class="dashboard-list" id="dash-responsaveis"></div>
-        </section>
-      </div>
-    </div>
-
-    <!-- ===== VIEW: LISTA ===== -->
-    <div class="view active" id="view-lista">
-
-      <div class="stats">
-        <div class="stat-card">
-          <span class="label">Total</span>
-          <span class="value" id="stat-total">—</span>
+    <!-- ===== 3) O QUE VOCÊ GANHA (BENEFÍCIOS PRINCIPAIS) ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="head reveal text-center">
+          <span class="eyebrow">O Que Você Ganha</span>
+          <h2>Três pilares do programa</h2>
         </div>
-        <div class="stat-card">
-          <span class="label">Clientes Ativos</span>
-          <span class="value ativo" id="stat-ativo">—</span>
-        </div>
-        <div class="stat-card">
-          <span class="label">Novos Leads</span>
-          <span class="value prospect" id="stat-prospect">—</span>
-        </div>
-        <div class="stat-card">
-          <span class="label">Influenciadores</span>
-          <span class="value inativo" id="stat-inativo">—</span>
-        </div>
-        <div class="stat-card">
-          <span class="label">Valor Total (R$)</span>
-          <span class="value" id="stat-valor">—</span>
-        </div>
-      </div>
 
-      <div class="owner-tabs" id="responsavel-tabs"></div>
-
-      <div class="filters">
-        <input type="text" id="busca" placeholder="🔍 Buscar por nome, e-mail ou empresa..." oninput="renderTabela()" />
-        <select id="filtro-status" onchange="renderTabela()">
-          <option value="">Todos os status</option>
-          <option value="novo_lead">Novo Lead</option>
-          <option value="em_contato">Em Contato</option>
-          <option value="follow_up">Follow-up</option>
-          <option value="nova_oportunidade">Nova Oportunidade</option>
-          <option value="diagnostico">Diagnóstico</option>
-          <option value="proposta">Proposta</option>
-          <option value="fechado">Fechado</option>
-          <option value="novo_influenciador">Novo Influenciador</option>
-          <option value="relacionamento">Relacionamento</option>
-          <option value="nova_indicacao">Nova Indicação</option>
-          <option value="conquistado">Conquistado</option>
-        </select>
-        <select id="filtro-ordem" onchange="renderTabela()">
-          <option value="nome">Ordenar por Nome</option>
-          <option value="valor">Ordenar por Valor</option>
-          <option value="status">Ordenar por Status</option>
-        </select>
-      </div>
-
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Cliente</th>
-              <th>Telefone</th>
-              <th>Status</th>
-              <th>Valor (R$)</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="tabela-body">
-            <tr>
-              <td colspan="6">
-                <div class="empty-state">
-                  <div class="icon">⏳</div>
-                  Carregando clientes...
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ===== VIEW: KANBAN - NOVOS LEADS ===== -->
-    <div class="view" id="view-kanban-novos">
-      <div class="kanban-topbar">
-        <div class="kanban-legend">
-          <span>Novos Leads: arraste os cards entre Novo Lead, Em Contato, Diagnóstico, Proposta e Fechado.</span>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <input type="text" id="kanban-busca-novos"
-            placeholder="🔍 Filtrar novos leads..."
-            oninput="renderKanban('Novo')"
-            style="padding:7px 12px;border:1px solid #dce0f0;border-radius:8px;font-size:0.88rem;outline:none;width:220px" />
+        <div class="benefit-grid">
+          <div class="card benefit-card reveal reveal-delay-1">
+            <span class="icon-big">💰</span>
+            <h3>Renda Recorrente</h3>
+            <p>
+              Você indica o cliente e <strong>ganha com todos os projetos</strong> 
+              que a IndustriAlly fizer para esse cliente durante <strong>5 anos</strong>.
+            </p>
+          </div>
+          <div class="card benefit-card card-highlight reveal reveal-delay-2">
+            <span class="icon-big">🚀</span>
+            <h3>Você é Turbinado</h3>
+            <p>
+              <strong>Não competimos com você.</strong> Pelo contrário: quando vendermos 
+              uma solução para o cliente que você indicou, <strong>você terá prioridade</strong> 
+              com seus produtos e serviços.
+            </p>
+          </div>
+          <div class="card benefit-card reveal reveal-delay-3">
+            <span class="icon-big">📊</span>
+            <h3>Transparência Total</h3>
+            <p>
+              Acompanhe <strong>todas as suas indicações</strong>, o relacionamento 
+              com cada cliente e o status de cada oportunidade na plataforma.
+            </p>
+          </div>
         </div>
       </div>
-      <div class="kanban-board" id="kanban-board-novos"></div>
-    </div>
+    </section>
 
-    <!-- ===== VIEW: KANBAN - CLIENTES ATIVOS ===== -->
-    <div class="view" id="view-kanban-ativos">
-      <div class="kanban-topbar">
-        <div class="kanban-legend">
-          <span>Clientes Ativos: arraste os cards entre Follow-up, Nova Oportunidade, Diagnóstico, Proposta e Fechado.</span>
+    <!-- ===== 4) GARANTIAS ADICIONAIS ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="head reveal">
+          <span class="eyebrow">Garantias do Programa</span>
+          <h2>O que você pode esperar</h2>
         </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <input type="text" id="kanban-busca-ativos"
-            placeholder="🔍 Filtrar clientes ativos..."
-            oninput="renderKanban('Ativo')"
-            style="padding:7px 12px;border:1px solid #dce0f0;border-radius:8px;font-size:0.88rem;outline:none;width:220px" />
+
+        <div class="guarantee-grid">
+          <div class="guarantee-item reveal reveal-delay-1">
+            <span class="icon-g">🔒</span>
+            <div>
+              <h4>Prioridade Garantida</h4>
+              <p>A primeira indicação válida e aprovada fica registrada no parceiro que cadastrou primeiro.</p>
+            </div>
+          </div>
+          <div class="guarantee-item reveal reveal-delay-2">
+            <span class="icon-g">🚫</span>
+            <div>
+              <h4>Sem Concorrência</h4>
+              <p>Não competimos com você. Pelo contrário: abrimos portas e turbinamos suas vendas.</p>
+            </div>
+          </div>
+          <div class="guarantee-item reveal reveal-delay-3">
+            <span class="icon-g">👥</span>
+            <div>
+              <h4>Relacionamento Protegido</h4>
+              <p>O cliente é seu. A IndustriAlly executa os projetos, mas o relacionamento comercial permanece com você.</p>
+            </div>
+          </div>
+          <div class="guarantee-item reveal reveal-delay-4">
+            <span class="icon-g">⏱️</span>
+            <div>
+              <h4>5 Anos de Remuneração</h4>
+              <p>Você ganha com todos os projetos que executamos para o cliente que você indicou, por até 5 anos.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="kanban-board" id="kanban-board-ativos"></div>
-    </div>
+    </section>
 
-    <!-- ===== VIEW: KANBAN - INFLUENCIADORES ===== -->
-    <div class="view" id="view-kanban-influenciadores">
-      <div class="kanban-topbar">
-        <div class="kanban-legend">
-          <span>Influenciadores: arraste os cards entre Novo Influenciador, Relacionamento, Follow-up, Nova Indicação e Conquistado.</span>
+    <!-- ===== 5) VOCÊ JÁ VIVEU ISSO (PROBLEMA) ===== -->
+    <section class="section" id="viveu">
+      <div class="container">
+        <div class="head reveal">
+          <span class="eyebrow">Identificação Imediata</span>
+          <h2>Você provavelmente já viveu isso...</h2>
+          <p>Conversas que acontecem no dia a dia de quem visita indústrias.</p>
         </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <input type="text" id="kanban-busca-influenciadores"
-            placeholder="🔍 Filtrar influenciadores..."
-            oninput="renderKanban('Influenciador')"
-            style="padding:7px 12px;border:1px solid #dce0f0;border-radius:8px;font-size:0.88rem;outline:none;width:220px" />
+
+        <div class="grid grid-4">
+          <div class="card reveal reveal-delay-1">
+            <div class="icon">👂</div>
+            <p>“O cliente comentou que quer automatizar uma máquina.”</p>
+          </div>
+          <div class="card reveal reveal-delay-2">
+            <div class="icon">👂</div>
+            <p>“A manutenção falou sobre reduzir custos operacionais.”</p>
+          </div>
+          <div class="card reveal reveal-delay-3">
+            <div class="icon">👂</div>
+            <p>“A engenharia comentou sobre um novo projeto.”</p>
+          </div>
+          <div class="card reveal reveal-delay-4">
+            <div class="icon">👂</div>
+            <p>“O gerente citou nova linha de produção.”</p>
+          </div>
+        </div>
+
+        <div class="lived-highlight reveal">
+          <div class="big">
+            Você ouviu. Viu potencial. O projeto saiu.<br>
+            <span class="highlight">Outro fornecedor executou. Agora, isso muda.</span>
+          </div>
+          <div class="zero-box">
+            <span>Resultado antigo</span>
+            <strong>R$ 0,00</strong>
+            <span style="color: #10B981; font-weight: 600;">Resultado novo: renda recorrente</span>
+          </div>
         </div>
       </div>
-      <div class="kanban-board" id="kanban-board-influenciadores"></div>
-    </div>
+    </section>
+
+    <!-- ===== 6) ANTES E DEPOIS ===== -->
+    <section class="section" id="antes-depois">
+      <div class="container">
+        <div class="head reveal">
+          <span class="eyebrow">Transformação</span>
+          <h2>Antes vs. Depois de se tornar parceiro</h2>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card before-card reveal reveal-delay-1">
+            <h3 style="color: #EF4444;">❌ Antes da IndustriAlly</h3>
+            <ul class="ba-list">
+              <li><span class="icon-before">✗</span> Você via oportunidade, mas não monetizava</li>
+              <li><span class="icon-before">✗</span> Outro fornecedor fechava o projeto</li>
+              <li><span class="icon-before">✗</span> Seu esforço gerava R$ 0 em projetos grandes</li>
+              <li><span class="icon-before">✗</span> Você não tinha visibilidade do que acontecia</li>
+              <li><span class="icon-before">✗</span> Seu relacionamento não gerava retorno financeiro</li>
+            </ul>
+          </div>
+          <div class="card after-card reveal reveal-delay-2">
+            <h3 style="color: #10B981;">✅ Com a IndustriAlly</h3>
+            <ul class="ba-list">
+              <li><span class="icon-after">✓</span> Cada conversa vira uma oportunidade de renda</li>
+              <li><span class="icon-after">✓</span> Nós executamos a parte técnica e comercial</li>
+              <li><span class="icon-after">✓</span> Você cria uma nova fonte de receita na sua carteira</li>
+              <li><span class="icon-after">✓</span> Acompanhamento total na plataforma</li>
+              <li><span class="icon-after">✓</span> Seu relacionamento vira ativo financeiro</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7) PROVA SOCIAL ===== -->
+    <section class="section" id="prova-social">
+      <div class="container">
+        <div class="head reveal text-center">
+          <span class="eyebrow">Autoridade e Confiança</span>
+          <h2>Números que sustentam nossa credibilidade</h2>
+        </div>
+
+        <div class="grid grid-4">
+          <div class="card stat-card reveal reveal-delay-1">
+            <strong>+12</strong>
+            <span>Anos de atuação em automação</span>
+          </div>
+          <div class="card stat-card reveal reveal-delay-2">
+            <strong>+430</strong>
+            <span>Projetos industriais entregues</span>
+          </div>
+          <div class="card stat-card reveal reveal-delay-3">
+            <strong>+120</strong>
+            <span>Parceiros comerciais em rede</span>
+          </div>
+          <div class="card stat-card reveal reveal-delay-4">
+            <strong>5 anos</strong>
+            <span>Remuneração por indicação</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 8) DEPOIMENTOS ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="head reveal">
+          <span class="eyebrow">Depoimentos Reais</span>
+          <h2>Quem já está monetizando</h2>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card testimonial-card reveal reveal-delay-1">
+            <p>“Eu já visitava essa fábrica há anos. A indicação virou projeto de retrofit e gerou uma remuneração que eu não teria sozinho.”</p>
+            <small>Representante comercial • segmento alimentício</small>
+          </div>
+          <div class="card testimonial-card reveal reveal-delay-2">
+            <p>“O melhor ponto é não precisar fazer proposta técnica. Eu sigo vendendo meu portfólio e ainda monetizo as oportunidades maiores.”</p>
+            <small>Distribuidor • automação e elétrica industrial</small>
+          </div>
+          <div class="card testimonial-card reveal reveal-delay-3">
+            <p>“Processo simples, sem conflito comercial e com acompanhamento pelo portal. Vejo tudo que acontece com meus clientes.”</p>
+            <small>Consultor industrial • manutenção e integração</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 9) COMO FUNCIONA (FLUXO) ===== -->
+    <section class="section" id="como-funciona">
+      <div class="container">
+        <div class="head reveal text-center">
+          <span class="eyebrow">Processo Simples</span>
+          <h2>Como funciona o programa?</h2>
+          <p>Você participa no início. A IndustriAlly cuida da execução completa.</p>
+        </div>
+
+        <div class="flow-steps">
+          <div class="card flow-step reveal reveal-delay-1">
+            <span class="step-number">1</span>
+            <h4>Visita</h4>
+            <p>Sua rotina comercial continua normal.</p>
+          </div>
+          <div class="card flow-step reveal reveal-delay-2">
+            <span class="step-number">2</span>
+            <h4>Identifica</h4>
+            <p>Qualquer demanda de automação.</p>
+          </div>
+          <div class="card flow-step reveal reveal-delay-3">
+            <span class="step-number">3</span>
+            <h4>Cadastra</h4>
+            <p>Registro rápido na plataforma.</p>
+          </div>
+          <div class="card flow-step reveal reveal-delay-4">
+            <span class="step-number">4</span>
+            <h4>Executamos</h4>
+            <p>Engenharia, proposta e instalação.</p>
+          </div>
+          <div class="card flow-step reveal reveal-delay-5">
+            <span class="step-number">5</span>
+            <h4>Você ganha</h4>
+            <p>Remuneração com transparência.</p>
+          </div>
+        </div>
+
+        <div class="card card-success reveal" style="margin-top: 24px; text-align: center;">
+          <p style="font-weight: 600; color: var(--text-secondary);">
+            💡 <strong>Você indica, nós executamos, você ganha por 5 anos</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 10) GATILHO: O QUE VOCÊ PERDE ===== -->
+    <section class="section" style="padding-top: 40px; padding-bottom: 40px;">
+      <div class="container">
+        <div class="card reveal" style="border-color: rgba(245, 158, 11, 0.15); background: rgba(245, 158, 11, 0.02);">
+          <div style="display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center;">
+            <div style="font-size: 3rem;">⚠️</div>
+            <div>
+              <h3 style="color: #F59E0B; font-size: 1.4rem;">A cada mês que você adia...</h3>
+              <p style="color: var(--text-secondary); font-size: 1rem;">
+                Você deixa de ganhar <strong>R$ 9.000 em média</strong> por mês com oportunidades que já passam por você.
+                Enquanto isso, outros fornecedores estão lucrando com o relacionamento que você construiu.
+              </p>
+              <div style="margin-top: 12px;">
+                <a href="#cadastro" class="btn btn-warning">Quero parar de deixar dinheiro na mesa</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 11) CALCULADORA ===== -->
+    <section class="section" id="calculadora">
+      <div class="container">
+        <div class="head reveal">
+          <span class="eyebrow">Simule Seu Potencial</span>
+          <h2>Calculadora de ganhos</h2>
+          <p>Use seu cenário real de visitas e veja quanto você pode estar deixando na mesa.</p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card reveal reveal-delay-1">
+            <h3>Monte seu cenário</h3>
+
+            <div class="calc-field">
+              <label>
+                Oportunidades por mês
+                <strong id="oppMesVal">6</strong>
+              </label>
+              <input id="oppMes" type="range" min="1" max="30" value="6" />
+            </div>
+
+            <div class="calc-field">
+              <label>Ticket médio do projeto</label>
+              <select id="ticketMedio">
+                <option value="50000">R$ 50.000</option>
+                <option value="100000" selected>R$ 100.000</option>
+                <option value="150000">R$ 150.000</option>
+                <option value="250000">R$ 250.000</option>
+                <option value="400000">R$ 400.000</option>
+              </select>
+            </div>
+
+            <div class="calc-field">
+              <label>
+                Taxa de fechamento
+                <strong id="taxaFechamentoVal">30%</strong>
+              </label>
+              <input id="taxaFechamento" type="range" min="10" max="80" value="30" />
+            </div>
+
+            <div class="calc-field">
+              <label>
+                Percentual de remuneração
+                <strong id="percComissaoVal">5%</strong>
+              </label>
+              <input id="percComissao" type="range" min="2" max="12" step="0.5" value="5" />
+            </div>
+
+            <div style="margin-top: 24px;">
+              <a href="#cadastro" class="btn btn-primary btn-block">Quero transformar esse potencial em cadastro</a>
+            </div>
+          </div>
+
+          <div class="calc-result reveal reveal-delay-2">
+            <h3>Seu resultado estimado</h3>
+            <div class="calc-result-item">
+              <span>Projetos fechados / mês</span>
+              <strong id="projFechados">1,8</strong>
+            </div>
+            <div class="calc-result-item">
+              <span>Potencial mensal</span>
+              <strong class="accent" id="potMensal">R$ 9.000</strong>
+            </div>
+            <div class="calc-result-item">
+              <span>Potencial anual</span>
+              <strong class="accent" id="potAnual">R$ 108.000</strong>
+            </div>
+            <div class="calc-result-item">
+              <span>Potencial em 5 anos</span>
+              <strong class="accent" id="potCincoAnos">R$ 540.000</strong>
+            </div>
+            <p class="calc-small">
+              Estimativa para orientação comercial. Valor final depende dos projetos efetivamente fechados.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 12) TABELA DE COMISSÕES ===== -->
+    <section class="section" id="comissoes">
+      <div class="container">
+        <div class="head reveal">
+          <span class="eyebrow">Exemplos Práticos</span>
+          <h2>Tabela de comissões reais</h2>
+          <p>Valores estimados baseados em projetos reais executados pela IndustriAlly.</p>
+        </div>
+
+        <div class="table-wrap reveal">
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo de projeto</th>
+                <th>Valor médio</th>
+                <th>Faixa de remuneração</th>
+                <th>Seu trabalho</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Retrofit</td>
+                <td>R$ 40.000 – R$ 120.000</td>
+                <td><strong style="color: #10B981;">R$ 2.000 – R$ 6.000</strong></td>
+                <td>Indicar</td>
+              </tr>
+              <tr>
+                <td>Máquina especial</td>
+                <td>R$ 80.000 – R$ 250.000</td>
+                <td><strong style="color: #10B981;">R$ 4.000 – R$ 12.000</strong></td>
+                <td>Indicar</td>
+              </tr>
+              <tr>
+                <td>Linha automatizada</td>
+                <td>R$ 200.000 – R$ 600.000</td>
+                <td><strong style="color: #10B981;">R$ 10.000 – R$ 30.000</strong></td>
+                <td>Indicar</td>
+              </tr>
+              <tr>
+                <td>Célula robotizada</td>
+                <td>R$ 150.000 – R$ 500.000</td>
+                <td><strong style="color: #10B981;">R$ 8.000 – R$ 25.000</strong></td>
+                <td>Indicar</td>
+              </tr>
+              <tr>
+                <td>Turn Key</td>
+                <td>R$ 300.000+</td>
+                <td><strong style="color: #10B981;">R$ 15.000 – R$ 30.000+</strong></td>
+                <td>Indicar</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card reveal" style="margin-top: 16px; border-color: var(--border-strong); text-align: center;">
+          <p style="font-weight: 600; color: var(--text-secondary);">
+            💡 Uma única oportunidade bem indicada pode pagar mais do que semanas de visitas sem monetização.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 13) GARANTIAS ===== -->
+    <section class="section" id="garantias">
+      <div class="container">
+        <div class="head reveal">
+          <span class="eyebrow">Segurança Comercial</span>
+          <h2>Garantias do programa</h2>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card reveal reveal-delay-1">
+            <h3>🔒 Primeira indicação aprovada fica registrada</h3>
+            <p class="text-secondary">Prioridade protegida no sistema com data e hora.</p>
+          </div>
+          <div class="card reveal reveal-delay-2">
+            <h3>📊 Portal de acompanhamento</h3>
+            <p class="text-secondary">Você acompanha status das oportunidades e remuneração.</p>
+          </div>
+          <div class="card reveal reveal-delay-3">
+            <h3>💰 Comissões transparentes</h3>
+            <p class="text-secondary">Regras claras e visibilidade sobre o processo.</p>
+          </div>
+          <div class="card reveal reveal-delay-4">
+            <h3>🎯 Sem custo para participar</h3>
+            <p class="text-secondary">Sem mensalidade, sem taxa de entrada e sem obrigação de meta.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 14) FAQ ===== -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="head reveal">
+          <span class="eyebrow">Dúvidas Frequentes</span>
+          <h2>Perguntas frequentes</h2>
+        </div>
+
+        <div class="faq">
+          <div class="faq-item reveal">
+            <button class="faq-btn">
+              Quem fica com a empresa indicada?
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-content">A primeira indicação válida e aprovada fica registrada no parceiro que cadastrou primeiro. O relacionamento comercial é seu.</div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-btn">
+              Preciso negociar ou fazer proposta?
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-content">Não. A IndustriAlly assume engenharia, proposta, negociação, execução e suporte completo.</div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-btn">
+              Posso acompanhar minhas indicações?
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-content">Sim. A plataforma mostra todas as suas indicações, o relacionamento com cada cliente e o status de cada oportunidade em tempo real.</div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-btn">
+              Vocês vão competir comigo no cliente que indiquei?
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-content">Não. Pelo contrário: vamos turbinar suas vendas. Quando vendermos uma solução para o cliente que você indicou, você terá prioridade com seus produtos e serviços.</div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-btn">
+              Quanto tempo recebo comissão?
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-content">Até cinco anos. Você ganha com todos os projetos que a IndustriAlly executar para o cliente que você indicou durante esse período.</div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-btn">
+              Tem custo para participar?
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-content">Não. Sem taxa de entrada e sem mensalidade. Participação 100% gratuita.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 15) CADASTRO (FORMULÁRIO) ===== -->
+    <section class="section" id="cadastro">
+      <div class="container">
+        <div class="grid grid-2">
+          <div class="reveal">
+            <span class="eyebrow">Cadastro Comercial</span>
+            <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; letter-spacing: -0.02em; margin-top: 12px; color: var(--text-primary);">
+              Entre no programa e comece a <span style="color: #10B981;">monetizar sua carteira</span>
+            </h2>
+            <p class="text-secondary" style="margin-top: 8px; max-width: 50ch;">
+              Preencha suas informações comerciais para análise rápida do seu perfil e região de atuação.
+            </p>
+            <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; align-items: center; gap: 12px; color: var(--text-secondary);">
+                <span style="color: #10B981; font-size: 1.2rem;">✓</span>
+                <div><strong style="color: var(--text-primary);">Renda recorrente</strong> — Ganhe com todos os projetos por 5 anos</div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; color: var(--text-secondary);">
+                <span style="color: #10B981; font-size: 1.2rem;">✓</span>
+                <div><strong style="color: var(--text-primary);">Sem concorrência</strong> — Nós turbinamos suas vendas</div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; color: var(--text-secondary);">
+                <span style="color: #10B981; font-size: 1.2rem;">✓</span>
+                <div><strong style="color: var(--text-primary);">Transparência total</strong> — Acompanhe tudo na plataforma</div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; color: var(--text-secondary);">
+                <span style="color: #10B981; font-size: 1.2rem;">✓</span>
+                <div><strong style="color: var(--text-primary);">Sem custos</strong> — Sem mensalidade, sem taxa de entrada</div>
+              </div>
+            </div>
+          </div>
+
+          <form class="card reveal reveal-delay-2" id="leadForm" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Nome completo <span class="required">*</span></label>
+                <input id="nome" type="text" required placeholder="Seu nome" />
+              </div>
+              <div class="form-group">
+                <label>WhatsApp <span class="required">*</span></label>
+                <input id="whatsapp" type="tel" required placeholder="(00) 00000-0000" />
+              </div>
+
+              <div class="form-group">
+                <label>E-mail <span class="required">*</span></label>
+                <input id="email" type="email" required placeholder="voce@empresa.com" />
+              </div>
+              <div class="form-group">
+                <label>Empresa / Razão social</label>
+                <input id="empresa" type="text" placeholder="Nome da empresa" />
+              </div>
+
+              <div class="form-group">
+                <label>Perfil profissional <span class="required">*</span></label>
+                <select id="perfil" required>
+                  <option value="">Selecione</option>
+                  <option>Representante comercial</option>
+                  <option>Distribuidor</option>
+                  <option>Vendedor de automação</option>
+                  <option>Vendedor de componentes elétricos</option>
+                  <option>Empresa de manutenção</option>
+                  <option>Consultor industrial</option>
+                  <option>Integrador</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Região de atuação <span class="required">*</span></label>
+                <input id="regiao" type="text" required placeholder="Ex: Interior SP, Sul MG..." />
+              </div>
+
+              <div class="form-group">
+                <label>Quantas indústrias você visita por mês?</label>
+                <select id="visitas">
+                  <option value="">Selecione</option>
+                  <option>1 a 10</option>
+                  <option>11 a 25</option>
+                  <option>26 a 50</option>
+                  <option>51 a 100</option>
+                  <option>Mais de 100</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Segmentos atendidos</label>
+                <input id="segmento" type="text" placeholder="Alimentos, metalmecânico..." />
+              </div>
+
+              <div class="form-group full">
+                <label>Observações comerciais</label>
+                <textarea id="mensagem" placeholder="Conte rapidamente seu contexto comercial e carteira atual."></textarea>
+              </div>
+
+              <div class="form-group full">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                  Quero virar parceiro IndustriAlly
+                </button>
+              </div>
+            </div>
+
+            <p class="form-fine">🔒 Seus dados estão seguros. Não compartilhamos com terceiros.</p>
+            <div id="formStatus" class="form-status"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 16) CTA FINAL ===== -->
+    <section class="section" style="padding-top: 40px; padding-bottom: 80px;">
+      <div class="container">
+        <div class="final-cta reveal">
+          <h2>Você já entra nessas empresas.<br>Agora comece a <span>ganhar por isso</span>.</h2>
+          <p>
+            Toda semana que você adia, novas oportunidades passam e o dinheiro vai para outro fornecedor.
+            Pare de deixar margem na mesa. Cadastre-se e transforme relacionamento em renda recorrente.
+          </p>
+          <div class="final-actions">
+            <a href="#cadastro" class="btn btn-accent btn-lg">Quero começar agora</a>
+            <a href="#calculadora" class="btn btn-ghost btn-lg">Recalcular meu potencial</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
-</div>
 
-<!-- ===== MODAL: NOVO / EDITAR ===== -->
-<div class="overlay" id="modal-form">
-  <div class="modal modal-cliente-form">
-    <button class="close-btn" onclick="fecharModal('modal-form')">✕</button>
-    <h2 id="modal-form-titulo">Novo Cliente</h2>
-
-    <div class="cliente-form-layout">
-      <section class="cliente-form-cadastro" aria-label="Informações cadastrais">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Nome Completo *</label>
-            <input type="text" id="f-nome" placeholder="Ex: João da Silva" />
-          </div>
-          <div class="form-group">
-            <label>Empresa</label>
-            <input type="text" id="f-empresa" placeholder="Ex: Tech Corp" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>E-mail *</label>
-            <input type="email" id="f-email" placeholder="joao@email.com" />
-          </div>
-          <div class="form-group">
-            <label>Telefone</label>
-            <input type="text" id="f-telefone" placeholder="(11) 91234-5678" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Status</label>
-            <select id="f-status"></select>
-          </div>
-          <div class="form-group">
-            <label>Valor (R$)</label>
-            <input type="number" id="f-valor" placeholder="0.00" min="0" step="0.01" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Tipo de Lead</label>
-            <select id="f-tipoLead" onchange="atualizarStatusForm()">
-              <option value="Novo">Novo</option>
-              <option value="Ativo">Ativo</option>
-              <option value="Influenciador">Influenciador</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Responsável</label>
-            <select id="f-responsavel">
-              <option value="">Neutra</option>
-              <option value="valdir">Valdir</option>
-              <option value="nilton">Nilton</option>
-              <option value="matheus">Matheus</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Indicado Por (Fonte)</label>
-          <input type="text" id="f-indicadoPor" placeholder="Ex: Carlos - CEO, LinkedIn, Evento..." />
-        </div>
-        <div class="form-group">
-          <label>WhatsApp Link</label>
-          <input type="url" id="f-linkWhatsapp" placeholder="https://wa.me/55..." />
-        </div>
-        <div class="form-group">
-          <label>LinkedIn Link</label>
-          <input type="url" id="f-linkLinkedin" placeholder="https://linkedin.com/in/..." />
-        </div>
-      </section>
-
-      <section class="cliente-form-anotacoes" aria-label="Anotações do cliente">
-        <div class="form-group">
-          <label>Anotações Principais</label>
-          <textarea id="f-notas" placeholder="Observações sobre o cliente..."></textarea>
-        </div>
-      </section>
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      © <span id="year"></span> IndustriAlly. Todos os direitos reservados.
     </div>
+  </footer>
 
-    <div class="modal-actions">
-      <button class="btn" style="background:#f0f0f0;color:#333" onclick="fecharModal('modal-form')">Cancelar</button>
-      <button class="btn btn-primary" onclick="salvarCliente()">💾 Salvar</button>
-    </div>
+  <!-- ===== STICKY MOBILE CTA ===== -->
+  <div class="sticky-mobile">
+    <a href="#cadastro" class="btn btn-primary">Quero monetizar minhas visitas</a>
   </div>
-</div>
-<!-- ===== MODAL: DETALHES ===== -->
-<div class="overlay" id="modal-detalhes">
-  <div class="modal">
-    <button class="close-btn" onclick="fecharModal('modal-detalhes')">✕</button>
-    <h2 id="det-nome">—</h2>
 
-    <div class="detail-grid">
-      <div class="detail-item">
-        <div class="detail-label">E-mail</div>
-        <div class="detail-value" id="det-email">—</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Telefone</div>
-        <div class="detail-value" id="det-telefone">—</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Empresa</div>
-        <div class="detail-value" id="det-empresa">—</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Status</div>
-        <div class="detail-value" id="det-status">—</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Valor</div>
-        <div class="detail-value" id="det-valor">—</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">ID</div>
-        <div class="detail-value" id="det-id">—</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Responsável</div>
-        <div class="detail-value" id="det-responsavel">-</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Tipo de Lead</div>
-        <div class="detail-value" id="det-tipoLead">—</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Indicado Por</div>
-        <div class="detail-value" id="det-indicadoPor">—</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Último Follow Up</div>
-        <div class="detail-value" id="det-ultimoFollowUp">—</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Próxima Data</div>
-        <div class="detail-value" id="det-proximaData">—</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">WhatsApp</div>
-        <div class="detail-value">
-          <a id="det-linkWhatsapp" href="#" target="_blank" style="color:#25d366;text-decoration:none">
-            💬 Abrir WhatsApp
-          </a>
-        </div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">LinkedIn</div>
-        <div class="detail-value">
-          <a id="det-linkLinkedin" href="#" target="_blank" style="color:#0a66c2;text-decoration:none">
-            🔗 Ver LinkedIn
-          </a>
-        </div>
-      </div>
-    </div>
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // Ano
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    <div class="detail-label" style="margin-top:16px;font-weight:600;color:#333">📝 Anotações Principais</div>
-    <div class="detail-anotacoes" id="det-anotacoes">—</div>
+    // Progress Bar
+    const progress = document.getElementById('progress');
+    const updateProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progressPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progress.style.width = progressPercent + '%';
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
 
-    <div class="modal-actions">
-      <button class="btn" style="background:#f0f0f0;color:#333" onclick="fecharModal('modal-detalhes')">Fechar</button>
-      <button class="btn btn-edit" onclick="editarDoDetalhe()">✏️ Editar</button>
-    </div>
-  </div>
-</div>
+    // Header scroll effect
+    const header = document.querySelector('.header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
 
-<!-- ===== TOAST ===== -->
-<div class="toast-container" id="toast-container"></div>
+    // Reveal Animations
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-<!-- ===== JAVASCRIPT ===== -->
-<script src="js/app.js"></script>
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+
+        if (!isOpen) {
+          item.classList.add('open');
+        }
+      });
+    });
+
+    // Calculadora
+    const oppMes = document.getElementById('oppMes');
+    const ticketMedio = document.getElementById('ticketMedio');
+    const taxaFechamento = document.getElementById('taxaFechamento');
+    const percComissao = document.getElementById('percComissao');
+
+    const oppMesVal = document.getElementById('oppMesVal');
+    const taxaFechamentoVal = document.getElementById('taxaFechamentoVal');
+    const percComissaoVal = document.getElementById('percComissaoVal');
+
+    const projFechados = document.getElementById('projFechados');
+    const potMensal = document.getElementById('potMensal');
+    const potAnual = document.getElementById('potAnual');
+    const potCincoAnos = document.getElementById('potCincoAnos');
+
+    const formatCurrency = (value) => {
+      return 'R$ ' + value.toLocaleString('pt-BR', { maximumFractionDigits: 0 });
+    };
+
+    function updateCalculator() {
+      const oportunidades = Number(oppMes.value);
+      const ticket = Number(ticketMedio.value);
+      const taxa = Number(taxaFechamento.value) / 100;
+      const comissao = Number(percComissao.value) / 100;
+
+      const fechados = oportunidades * taxa;
+      const mensal = fechados * ticket * comissao;
+      const anual = mensal * 12;
+      const cincoAnos = anual * 5;
+
+      oppMesVal.textContent = oportunidades;
+      taxaFechamentoVal.textContent = Math.round(taxa * 100) + '%';
+      percComissaoVal.textContent = (comissao * 100).toFixed(1).replace('.', ',') + '%';
+
+      projFechados.textContent = fechados.toLocaleString('pt-BR', { 
+        minimumFractionDigits: 1, 
+        maximumFractionDigits: 1 
+      });
+      potMensal.textContent = formatCurrency(mensal);
+      potAnual.textContent = formatCurrency(anual);
+      potCincoAnos.textContent = formatCurrency(cincoAnos);
+    }
+
+    [oppMes, ticketMedio, taxaFechamento, percComissao].forEach(el => {
+      el.addEventListener('input', updateCalculator);
+    });
+    updateCalculator();
+
+    // Formulário
+    const form = document.getElementById('leadForm');
+    const formStatus = document.getElementById('formStatus');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        formStatus.className = 'form-status error';
+        formStatus.textContent = '⚠️ Preencha todos os campos obrigatórios.';
+        form.reportValidity();
+        return;
+      }
+
+      formStatus.className = 'form-status success';
+      formStatus.textContent = '✅ Cadastro enviado com sucesso! Em breve nosso time comercial entrará em contato.';
+      
+      form.reset();
+      updateCalculator();
+
+      formStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-

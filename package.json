@@ -1,9 +1,13 @@
 {
-  "name": "crm-celiware",
+  "name": "industrially",
   "version": "1.0.0",
   "private": true,
-  "description": "CRM simples com backend Node para login e clientes.",
+  "description": "IndustriAlly — plataforma única: CRM interno (/crm) + portal de parceiros por indicação (/partner) para automação industrial. Node puro, sem dependências, dados em arquivos JSON.",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node seed.js"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

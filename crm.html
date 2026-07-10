@@ -1,0 +1,452 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CRM Simples</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<section class="auth-screen" id="auth-screen">
+  <form class="login-panel" id="login-form">
+    <h1>CRM Celiware</h1>
+    <p>Acesse para carregar os dados protegidos pela API.</p>
+    <div class="login-error" id="login-error">Login ou senha inválidos.</div>
+
+    <div class="form-group">
+      <label>Login</label>
+      <input type="text" id="login-usuario" autocomplete="username" required />
+    </div>
+    <div class="form-group">
+      <label>Senha</label>
+      <input type="password" id="login-senha" autocomplete="current-password" required />
+    </div>
+
+    <button class="btn btn-primary" type="submit" id="login-submit">Entrar</button>
+  </form>
+</section>
+
+<div class="layout auth-locked" id="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">CRM<span>.</span></div>
+    <nav>
+      <a class="active" onclick="mudarAba('lista', this)">
+        <span class="icon">👥</span>
+        <span>Clientes</span>
+      </a>
+      <a onclick="mudarAba('kanban-novos', this)">
+        <span class="icon">N</span>
+        <span>Novos Leads</span>
+      </a>
+      <a onclick="mudarAba('kanban-ativos', this)">
+        <span class="icon">A</span>
+        <span>Clientes Ativos</span>
+      </a>
+      <a onclick="mudarAba('kanban-influenciadores', this)">
+        <span class="icon">I</span>
+        <span>Influenciadores</span>
+      </a>
+      <a onclick="mudarAba('dashboard', this)">
+        <span class="icon">D</span>
+        <span>Dashboard</span>
+      </a>
+      <a>
+        <span class="icon">⚙️</span>
+        <span>Configurações</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <h1 id="page-title">Gestão de Clientes</h1>
+      <div class="topbar-actions" id="topbar-actions">
+        <div class="pomodoro" id="pomodoro" aria-label="Timer Pomodoro">
+          <span class="pomodoro-label">Foco</span>
+          <select class="pomodoro-duration" id="pomodoro-duration" aria-label="Tempo do Pomodoro" onchange="alterarDuracaoPomodoro(this.value)">
+            <option value="5">5 min</option>
+            <option value="10">10 min</option>
+            <option value="15">15 min</option>
+            <option value="25" selected>25 min</option>
+            <option value="45">45 min</option>
+          </select>
+          <span class="pomodoro-time" id="pomodoro-time">25:00</span>
+          <button class="pomodoro-btn" id="pomodoro-toggle" type="button" onclick="togglePomodoro()">Iniciar</button>
+          <button class="pomodoro-reset" type="button" title="Reiniciar Pomodoro" onclick="resetPomodoro()">↺</button>
+        </div>
+        <button class="btn" style="background:#e0f2fe;color:#0284c7" onclick="exportarJSON()">
+          ⬇️ Exportar JSON
+        </button>
+        <button class="btn" style="background:#f1f5f9;color:#475569" onclick="logout()">Sair</button>
+        <button class="btn btn-primary" onclick="abrirModalNovo()">
+          ➕ Novo Cliente
+        </button>
+      </div>
+    </div>
+
+    <!-- ABAS -->
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-lista" onclick="mudarAba('lista', this)">Lista</button>
+      <button class="tab-btn" id="tab-kanban-novos" onclick="mudarAba('kanban-novos', this)">Novos Leads</button>
+      <button class="tab-btn" id="tab-kanban-ativos" onclick="mudarAba('kanban-ativos', this)">Clientes Ativos</button>
+      <button class="tab-btn" id="tab-kanban-influenciadores" onclick="mudarAba('kanban-influenciadores', this)">Influenciadores</button>
+      <button class="tab-btn" id="tab-dashboard" onclick="mudarAba('dashboard', this)">Dashboard</button>
+    </div>
+
+    <!-- ===== VIEW: DASHBOARD ===== -->
+    <div class="view" id="view-dashboard">
+      <div class="dashboard-grid">
+        <div class="stat-card dashboard-card destaque">
+          <span class="label">Fechados no mês</span>
+          <span class="value" id="dash-valor-fechado">—</span>
+        </div>
+        <div class="stat-card dashboard-card">
+          <span class="label">Influenciadores conquistados</span>
+          <span class="value conquistado" id="dash-influenciadores">—</span>
+        </div>
+        <div class="stat-card dashboard-card">
+          <span class="label">Propostas abertas</span>
+          <span class="value proposta" id="dash-propostas">—</span>
+        </div>
+        <div class="stat-card dashboard-card">
+          <span class="label">Valor em propostas</span>
+          <span class="value" id="dash-valor-propostas">—</span>
+        </div>
+        <div class="stat-card dashboard-card">
+          <span class="label">Follow-ups vencidos</span>
+          <span class="value vencido" id="dash-vencidos">—</span>
+        </div>
+        <div class="stat-card dashboard-card">
+          <span class="label">Follow-ups próximos</span>
+          <span class="value proximo" id="dash-proximos">—</span>
+        </div>
+      </div>
+
+      <div class="dashboard-panels">
+        <section class="dashboard-panel">
+          <h2>Panorama por Kanban</h2>
+          <div class="dashboard-list" id="dash-pipelines"></div>
+        </section>
+        <section class="dashboard-panel">
+          <h2>Oportunidades por responsável</h2>
+          <div class="dashboard-list" id="dash-responsaveis"></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ===== VIEW: LISTA ===== -->
+    <div class="view active" id="view-lista">
+
+      <div class="stats">
+        <div class="stat-card">
+          <span class="label">Total</span>
+          <span class="value" id="stat-total">—</span>
+        </div>
+        <div class="stat-card">
+          <span class="label">Clientes Ativos</span>
+          <span class="value ativo" id="stat-ativo">—</span>
+        </div>
+        <div class="stat-card">
+          <span class="label">Novos Leads</span>
+          <span class="value prospect" id="stat-prospect">—</span>
+        </div>
+        <div class="stat-card">
+          <span class="label">Influenciadores</span>
+          <span class="value inativo" id="stat-inativo">—</span>
+        </div>
+        <div class="stat-card">
+          <span class="label">Valor Total (R$)</span>
+          <span class="value" id="stat-valor">—</span>
+        </div>
+      </div>
+
+      <div class="owner-tabs" id="responsavel-tabs"></div>
+
+      <div class="filters">
+        <input type="text" id="busca" placeholder="🔍 Buscar por nome, e-mail ou empresa..." oninput="renderTabela()" />
+        <select id="filtro-status" onchange="renderTabela()">
+          <option value="">Todos os status</option>
+          <option value="novo_lead">Novo Lead</option>
+          <option value="em_contato">Em Contato</option>
+          <option value="follow_up">Follow-up</option>
+          <option value="nova_oportunidade">Nova Oportunidade</option>
+          <option value="diagnostico">Diagnóstico</option>
+          <option value="proposta">Proposta</option>
+          <option value="fechado">Fechado</option>
+          <option value="novo_influenciador">Novo Influenciador</option>
+          <option value="relacionamento">Relacionamento</option>
+          <option value="nova_indicacao">Nova Indicação</option>
+          <option value="conquistado">Conquistado</option>
+        </select>
+        <select id="filtro-ordem" onchange="renderTabela()">
+          <option value="nome">Ordenar por Nome</option>
+          <option value="valor">Ordenar por Valor</option>
+          <option value="status">Ordenar por Status</option>
+        </select>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Cliente</th>
+              <th>Telefone</th>
+              <th>Status</th>
+              <th>Valor (R$)</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-body">
+            <tr>
+              <td colspan="6">
+                <div class="empty-state">
+                  <div class="icon">⏳</div>
+                  Carregando clientes...
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== VIEW: KANBAN - NOVOS LEADS ===== -->
+    <div class="view" id="view-kanban-novos">
+      <div class="kanban-topbar">
+        <div class="kanban-legend">
+          <span>Novos Leads: arraste os cards entre Novo Lead, Em Contato, Diagnóstico, Proposta e Fechado.</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="text" id="kanban-busca-novos"
+            placeholder="🔍 Filtrar novos leads..."
+            oninput="renderKanban('Novo')"
+            style="padding:7px 12px;border:1px solid #dce0f0;border-radius:8px;font-size:0.88rem;outline:none;width:220px" />
+        </div>
+      </div>
+      <div class="kanban-board" id="kanban-board-novos"></div>
+    </div>
+
+    <!-- ===== VIEW: KANBAN - CLIENTES ATIVOS ===== -->
+    <div class="view" id="view-kanban-ativos">
+      <div class="kanban-topbar">
+        <div class="kanban-legend">
+          <span>Clientes Ativos: arraste os cards entre Follow-up, Nova Oportunidade, Diagnóstico, Proposta e Fechado.</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="text" id="kanban-busca-ativos"
+            placeholder="🔍 Filtrar clientes ativos..."
+            oninput="renderKanban('Ativo')"
+            style="padding:7px 12px;border:1px solid #dce0f0;border-radius:8px;font-size:0.88rem;outline:none;width:220px" />
+        </div>
+      </div>
+      <div class="kanban-board" id="kanban-board-ativos"></div>
+    </div>
+
+    <!-- ===== VIEW: KANBAN - INFLUENCIADORES ===== -->
+    <div class="view" id="view-kanban-influenciadores">
+      <div class="kanban-topbar">
+        <div class="kanban-legend">
+          <span>Influenciadores: arraste os cards entre Novo Influenciador, Relacionamento, Follow-up, Nova Indicação e Conquistado.</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="text" id="kanban-busca-influenciadores"
+            placeholder="🔍 Filtrar influenciadores..."
+            oninput="renderKanban('Influenciador')"
+            style="padding:7px 12px;border:1px solid #dce0f0;border-radius:8px;font-size:0.88rem;outline:none;width:220px" />
+        </div>
+      </div>
+      <div class="kanban-board" id="kanban-board-influenciadores"></div>
+    </div>
+  </main>
+</div>
+
+<!-- ===== MODAL: NOVO / EDITAR ===== -->
+<div class="overlay" id="modal-form">
+  <div class="modal modal-cliente-form">
+    <button class="close-btn" onclick="fecharModal('modal-form')">✕</button>
+    <h2 id="modal-form-titulo">Novo Cliente</h2>
+
+    <div class="cliente-form-layout">
+      <section class="cliente-form-cadastro" aria-label="Informações cadastrais">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nome Completo *</label>
+            <input type="text" id="f-nome" placeholder="Ex: João da Silva" />
+          </div>
+          <div class="form-group">
+            <label>Empresa</label>
+            <input type="text" id="f-empresa" placeholder="Ex: Tech Corp" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>E-mail *</label>
+            <input type="email" id="f-email" placeholder="joao@email.com" />
+          </div>
+          <div class="form-group">
+            <label>Telefone</label>
+            <input type="text" id="f-telefone" placeholder="(11) 91234-5678" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Status</label>
+            <select id="f-status"></select>
+          </div>
+          <div class="form-group">
+            <label>Valor (R$)</label>
+            <input type="number" id="f-valor" placeholder="0.00" min="0" step="0.01" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tipo de Lead</label>
+            <select id="f-tipoLead" onchange="atualizarStatusForm()">
+              <option value="Novo">Novo</option>
+              <option value="Ativo">Ativo</option>
+              <option value="Influenciador">Influenciador</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Responsável</label>
+            <select id="f-responsavel">
+              <option value="">Neutra</option>
+              <option value="valdir">Valdir</option>
+              <option value="nilton">Nilton</option>
+              <option value="matheus">Matheus</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Indicado Por (Fonte)</label>
+          <input type="text" id="f-indicadoPor" placeholder="Ex: Carlos - CEO, LinkedIn, Evento..." />
+        </div>
+        <div class="form-group">
+          <label>WhatsApp Link</label>
+          <input type="url" id="f-linkWhatsapp" placeholder="https://wa.me/55..." />
+        </div>
+        <div class="form-group">
+          <label>LinkedIn Link</label>
+          <input type="url" id="f-linkLinkedin" placeholder="https://linkedin.com/in/..." />
+        </div>
+      </section>
+
+      <section class="cliente-form-anotacoes" aria-label="Anotações do cliente">
+        <div class="form-group">
+          <label>Anotações Principais</label>
+          <textarea id="f-notas" placeholder="Observações sobre o cliente..."></textarea>
+        </div>
+      </section>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn" style="background:#f0f0f0;color:#333" onclick="fecharModal('modal-form')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarCliente()">💾 Salvar</button>
+    </div>
+  </div>
+</div>
+<!-- ===== MODAL: DETALHES ===== -->
+<div class="overlay" id="modal-detalhes">
+  <div class="modal">
+    <button class="close-btn" onclick="fecharModal('modal-detalhes')">✕</button>
+    <h2 id="det-nome">—</h2>
+
+    <div class="detail-grid">
+      <div class="detail-item">
+        <div class="detail-label">E-mail</div>
+        <div class="detail-value" id="det-email">—</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Telefone</div>
+        <div class="detail-value" id="det-telefone">—</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Empresa</div>
+        <div class="detail-value" id="det-empresa">—</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Status</div>
+        <div class="detail-value" id="det-status">—</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Valor</div>
+        <div class="detail-value" id="det-valor">—</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">ID</div>
+        <div class="detail-value" id="det-id">—</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Responsável</div>
+        <div class="detail-value" id="det-responsavel">-</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Tipo de Lead</div>
+        <div class="detail-value" id="det-tipoLead">—</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Indicado Por</div>
+        <div class="detail-value" id="det-indicadoPor">—</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Último Follow Up</div>
+        <div class="detail-value" id="det-ultimoFollowUp">—</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Próxima Data</div>
+        <div class="detail-value" id="det-proximaData">—</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">WhatsApp</div>
+        <div class="detail-value">
+          <a id="det-linkWhatsapp" href="#" target="_blank" style="color:#25d366;text-decoration:none">
+            💬 Abrir WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">LinkedIn</div>
+        <div class="detail-value">
+          <a id="det-linkLinkedin" href="#" target="_blank" style="color:#0a66c2;text-decoration:none">
+            🔗 Ver LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-label" style="margin-top:16px;font-weight:600;color:#333">📝 Anotações Principais</div>
+    <div class="detail-anotacoes" id="det-anotacoes">—</div>
+
+    <div class="modal-actions">
+      <button class="btn" style="background:#f0f0f0;color:#333" onclick="fecharModal('modal-detalhes')">Fechar</button>
+      <button class="btn btn-edit" onclick="editarDoDetalhe()">✏️ Editar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script src="js/app.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

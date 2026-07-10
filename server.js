@@ -2,6 +2,7 @@
 const fs = require('fs/promises');
 const path = require('path');
 const crypto = require('crypto');
+const { handlePartnerApi, handleReferApi } = require('./partner');
 
 const PORT = Number(process.env.PORT || 3000);
 const ROOT_DIR = __dirname;
@@ -123,6 +124,16 @@ async function handleApi(req, res, pathname) {
     return;
   }
 
+  if (pathname.startsWith('/api/partner/')) {
+    await handlePartnerApi(req, res, pathname);
+    return;
+  }
+
+  if (pathname.startsWith('/api/refer/')) {
+    await handleReferApi(req, res, pathname);
+    return;
+  }
+
   if (pathname === '/api/health' && req.method === 'GET') {
     sendJson(res, 200, { ok: true });
     return;
@@ -227,15 +238,23 @@ async function handleApi(req, res, pathname) {
 }
 
 async function serveStatic(req, res, pathname) {
-  const requestedPath = pathname === '/' ? '/index.html' : pathname;
+  const routes = {
+    '/': '/index.html',
+    '/crm': '/crm.html',
+    '/partner': '/partner.html',
+    '/vendas': '/partner.html',
+  };
+  let requestedPath = routes[pathname] || pathname;
+  if (pathname === '/r' || pathname.startsWith('/r/')) requestedPath = '/refer.html';
+  const decodedPath = decodeURIComponent(requestedPath);
 
-  if (requestedPath === '/clientes.json') {
+  if (['/clientes.json', '/dados.json', '/partner.json', '/parceiros.json', '/config.json', '/comissoes.json', '/oportunidade.json', '/oportunidades.json', '/server.js', '/partner.js', '/package.json', '/Teste.Etiqueta.js'].includes(decodedPath)) {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end('Arquivo nao encontrado.');
     return;
   }
 
-  const filePath = path.normalize(path.join(ROOT_DIR, decodeURIComponent(requestedPath)));
+  const filePath = path.normalize(path.join(ROOT_DIR, decodedPath));
 
   if (!filePath.startsWith(ROOT_DIR)) {
     res.writeHead(403);

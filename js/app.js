@@ -598,7 +598,7 @@ function renderTabela() {
       <td style="color:#aaa;font-size:.8rem">${i + 1}</td>
       <td>
         <div class="td-nome">${esc(c.nome)}</div>
-        <div class="td-empresa">${esc(c.empresa || '—')}</div>
+        <div class="td-empresa">${esc(c.empresa || '—')}${c.origem === 'parceiro' ? ` <span style="color:#f07830;font-size:.72rem;font-weight:600">· 🤝 ${esc(c.indicadoPor || 'Parceiro')}</span>` : ''}</div>
       </td>
       <td>${esc(c.telefone || '—')}</td>
       <td><span class="badge badge-${c.status}">${labelStatus(c.status, c.tipoLead)}</span></td>
@@ -710,6 +710,7 @@ function criarCard(c) {
     </div>
     <div class="card-nome">${esc(c.nome)}</div>
     <div class="card-empresa">${esc(c.empresa || '—')}</div>
+    ${c.origem === 'parceiro' ? `<div class="card-info" style="color:#f07830;font-weight:600">🤝 Parceiro: ${esc(c.indicadoPor || '—')}</div>` : ''}
     ${c.email    ? `<div class="card-info">📧 ${esc(c.email)}</div>` : ''}
     ${c.telefone ? `<div class="card-info">📞 ${esc(c.telefone)}</div>` : ''}
     ${tipoLead ? `<div class="card-info card-tipo-lead">🏷️ ${esc(tipoLead)}</div>` : ''}

@@ -119,7 +119,7 @@ npm start        # sobe em http://localhost:3000  (ou defina PORT)
 | Onde | Login | Senha |
 |---|---|---|
 | Portal do parceiro (`/partner`) | `parceiro@celiware.com` | `parceiro123` |
-| CRM interno (`/crm`) | `valdir` | `valdir2026` |
+| CRM interno (`/crm`) | `valdir` | `demo1234` |
 
 Link de indicação de exemplo: **`/r/ra2026`**. No portal também dá para **criar uma conta** de parceiro (e-mail + senha).
 

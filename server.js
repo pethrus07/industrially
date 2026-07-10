@@ -9,28 +9,13 @@ const ROOT_DIR = __dirname;
 const DATA_FILE = path.join(ROOT_DIR, 'clientes.json');
 
 const sessions = new Map();
+// Usuários internos do CRM. EM PRODUÇÃO defina as senhas por variável de
+// ambiente (CRM_PASS_*); os valores abaixo são apenas para demonstração local.
+// Os logins (valdir/nilton/matheus) são usados como "responsável" no Kanban.
 const users = [
-  {
-    id: 1,
-    nome: 'Valdir Pavan Júnior',
-    login: 'valdir',
-    email: 'valdir@celiware.local',
-    senha: 'valdir2026',
-  },
-  {
-    id: 2,
-    nome: 'Nilton',
-    login: 'nilton',
-    email: 'nilton@celiware.local',
-    senha: 'nilton2026',
-  },
-  {
-    id: 3,
-    nome: 'Matheus',
-    login: 'matheus',
-    email: 'matheus@celiware.local',
-    senha: 'matheus2026',
-  },
+  { id: 1, nome: 'Valdir (Comercial)', login: 'valdir', email: 'valdir@industrially.local', senha: process.env.CRM_PASS_VALDIR || 'demo1234' },
+  { id: 2, nome: 'Nilton (Comercial)', login: 'nilton', email: 'nilton@industrially.local', senha: process.env.CRM_PASS_NILTON || 'demo1234' },
+  { id: 3, nome: 'Matheus (Comercial)', login: 'matheus', email: 'matheus@industrially.local', senha: process.env.CRM_PASS_MATHEUS || 'demo1234' },
 ];
 
 const contentTypes = {

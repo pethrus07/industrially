@@ -1,4 +1,14 @@
 ﻿<!DOCTYPE html>
+<!--
+  crm.html — a tela do CRM interno (rota "/crm"), usada pela equipe comercial.
+
+  Aqui está só a marcação: a lógica inteira vive em js/app.js e o estilo em
+  css/styles.css. Os botões chamam funções globais pelo `onclick`, então o HTML
+  e o app.js estão amarrados pelo nome da função e pelo id do elemento.
+
+  A tela nasce travada (.auth-locked) com a caixa de login por cima; quem
+  destrava é o POST /api/login, em js/app.js.
+-->
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />

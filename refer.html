@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+<!--
+  refer.html — a página pública de indicação, servida em "/r/<refCode>" para
+  qualquer visitante, sem login. É o "a mais" do produto: o parceiro compartilha
+  o link (ou o QR) e o contato da indústria se indica sozinho.
+
+  O código do padrinho não vem de parâmetro: o server.js manda /r/* para este
+  arquivo e o script lê o código do próprio caminho (location.pathname).
+  Três estados no mesmo cartão: link inválido, formulário e sucesso.
+
+  É a única tela que um desconhecido abre e que, no fim, grava no clientes.json.
+-->
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">

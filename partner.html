@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<!--
+  partner.html — o portal do parceiro (rotas "/partner" e "/vendas"), desenhado
+  para celular (barra de navegação embaixo, botão flutuante de indicar).
+
+  SPA de arquivo único: HTML, CSS e JS no mesmo lugar, sem build. São quatro
+  "páginas" (início, indicações, oportunidades, relatórios) trocadas por classe
+  CSS, mais a tela de login/cadastro e o cartão do link/QR de indicação.
+
+  A tela não calcula nada de negócio: estágio, valor liberado e comissão chegam
+  prontos de /api/partner/dashboard. Ela também nunca escolhe o que mostrar — o
+  recorte por parceiro é feito no servidor, a partir do token.
+-->
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">

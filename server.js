@@ -1,4 +1,15 @@
-﻿const http = require('http');
+﻿/**
+ * server.js — o único processo do IndustriAlly. Um servidor HTTP em Node puro
+ * (módulo `http`, zero dependência) que faz três coisas: serve as quatro telas
+ * como arquivo estático, responde a API do CRM interno (/api/login,
+ * /api/clientes) e delega ao partner.js tudo que começa com /api/partner/ ou
+ * /api/refer/.
+ *
+ * Por que Node cru: o CRM já rodava assim e o porte não paga um framework. O
+ * preço está aqui dentro — sessão em memória (reiniciar desloga todo mundo) e
+ * dados em arquivos JSON no disco da própria pasta.
+ */
+const http = require('http');
 const fs = require('fs/promises');
 const path = require('path');
 const crypto = require('crypto');

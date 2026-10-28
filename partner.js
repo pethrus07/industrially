@@ -1,18 +1,29 @@
+/**
+ * partner.js — a API do portal do parceiro (/api/partner/*) e a API pública de
+ * indicação por link/QR (/api/refer/*). É um módulo chamado pelo server.js: não
+ * abre servidor nem porta próprios.
+ *
+ * A regra que sustenta o produto mora aqui: a indicação do parceiro NÃO tem
+ * armazenamento próprio — ela nasce como lead dentro do clientes.json, o mesmo
+ * arquivo que o CRM interno lê e escreve. Indicação, oportunidade e comissão
+ * são três leituras diferentes do mesmo registro, calculadas na hora da
+ * resposta. Por isso não existe sincronização para dar errado.
+ */
 const fs = require('fs/promises');
 const path = require('path');
 const crypto = require('crypto');
 
-/* ═══════════════════════════════════════════════════════════════════
-   CELIWARE SALES — Backend do Portal do Parceiro
-   Mesmo padrão do CRM: Node puro + API + arquivos JSON.
-   O núcleo de dados é o clientes.json (compartilhado com o CRM):
-   a indicação do parceiro NASCE como um lead lá dentro.
-═══════════════════════════════════════════════════════════════════ */
-
+/* Os três arquivos que este módulo toca — não há banco, é a raiz do projeto.
+   parceiros.json é só dele; clientes.json é dividido com o CRM; config.json
+   guarda apenas o % de comissão padrão. */
 const PARCEIROS_FILE = path.join(__dirname, 'parceiros.json');
 const CLIENTES_FILE = path.join(__dirname, 'clientes.json');
 const CONFIG_FILE = path.join(__dirname, 'config.json');
 
+/* Mapa de sessões PRÓPRIO, separado do mapa do server.js de propósito: token de
+   parceiro não vale no CRM e token de vendedor não vale no portal, mesmo que os
+   dois usem o mesmo formato de Bearer. Como vive em memória, reiniciar o
+   processo desloga todos os parceiros. */
 const sessions = new Map();
 
 /* ─────────────────────────── HTTP helpers ─────────────────────────── */
@@ -95,7 +106,11 @@ function hashSenha(senha) {
 function verificarSenha(senha, armazenada) {
   const parts = String(armazenada || '').split('$');
   if (parts.length !== 3 || parts[0] !== 'scrypt') {
-    // Compatibilidade com seed antigo em texto puro
+    // Compatibilidade com seed antigo em texto puro.
+    // Por quê: parceiros.json escrito à mão (ou por seed antigo) ainda tem
+    // senha crua; sem este ramo esses logins parariam de funcionar de uma vez.
+    // O preço é que uma senha em texto puro no arquivo continua valendo — vale
+    // conferir o parceiros.json de produção e regravar as contas antigas.
     return String(senha) === String(armazenada);
   }
   const [, salt, hash] = parts;
@@ -134,6 +149,12 @@ function toMoney(value) {
 }
 
 // Traduz a etapa interna do CRM para o status simplificado que o parceiro vê.
+// Por quê: o parceiro não pode ver o funil da equipe (nem "diagnóstico" nem
+// "follow-up" dizem algo a ele), mas também não pode haver um segundo campo de
+// status para alguém esquecer de atualizar. A tradução é feita na leitura, a
+// partir de `lead.status`. Consequência prática: se alguém criar uma etapa nova
+// no Kanban (js/app.js › PIPELINES) e não incluí-la nas listas abaixo, ela cai
+// no default "Em análise" — o parceiro vê o negócio andando para trás.
 function statusParceiro(lead) {
   const s = String(lead.status || '').trim().toLowerCase();
   if (lead.perdido === true || s === 'perdido' || s === 'descartado') return 'Perdida';
@@ -218,6 +239,9 @@ async function publicPartnerData(parceiro) {
   const padrao = await comissaoPadrao();
   const pct = pctDoParceiro(parceiro, padrao);
   const clientes = await readClientes();
+  // O isolamento entre parceiros é ESTE filtro, e ele acontece no servidor, com
+  // o login que veio do token — a tela nunca pede "os leads do parceiro X".
+  // Toda resposta do portal passa por aqui; é o único ponto a auditar.
   const meus = clientes.filter(c => String(c.parceiroLogin || '').toLowerCase() === String(parceiro.login).toLowerCase());
 
   // Mais recentes primeiro
@@ -272,6 +296,11 @@ function criarSessao(parceiro) {
 }
 
 /* ─────────────────────────── Validação de indicação ─────────────────────────── */
+// A mesma validação serve ao formulário do parceiro logado e ao formulário
+// público do link — de propósito: indicação sem e-mail OU sem telefone não é
+// trabalhável pelo time comercial, e é o parceiro que perde a comissão depois.
+// Aceita dois nomes para os mesmos campos (contactName/person, project/interest)
+// porque as duas telas nasceram em momentos diferentes.
 function validarIndicacao(body) {
   const company = String(body.company || '').trim();
   const contactName = String(body.contactName || body.person || '').trim();
@@ -295,8 +324,14 @@ function validarIndicacao(body) {
 }
 
 // A indicação nasce como LEAD no clientes.json (o núcleo do CRM).
+// O formato tem de ser exatamente o que js/app.js espera de um lead — nome,
+// empresa, status, tipoLead, links —, senão o card quebra no Kanban. Os três
+// campos que só a indicação tem (origem, parceiroLogin, indicadoPor) são o que
+// devolve a comissão ao parceiro certo depois.
 function indicacaoParaLead(form, parceiro) {
   return {
+    // Sem banco não há sequência: o id é o relógio + ruído, para duas
+    // indicações no mesmo milissegundo não colidirem no arquivo.
     id: Date.now() + Math.floor(Math.random() * 1000),
     nome: form.contactName,
     empresa: form.company,

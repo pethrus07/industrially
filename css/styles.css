@@ -1,4 +1,13 @@
-﻿/* ===== RESET & BASE ===== */
+﻿/*
+ * css/styles.css — a folha de estilo do CRM interno (crm.html) e só dele.
+ *
+ * A landing (index.html), o portal do parceiro (partner.html) e a página de
+ * indicação (refer.html) carregam o próprio CSS embutido, com a identidade
+ * IndustriAlly (índigo/verde). Esta folha é outra coisa: a interface de
+ * trabalho da equipe, com a paleta antiga do CRM (#6c63ff sobre #f0f2f5).
+ * Escrita à mão, sem pré-processador e sem variáveis: cor em hex, direto.
+ */
+/* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {

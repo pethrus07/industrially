@@ -1,4 +1,16 @@
-﻿/* ═══════════════════════════════════════════════════════════════════
+﻿/**
+ * js/app.js — o CRM interno inteiro (a tela é crm.html): login, lista de
+ * clientes, três kanbans, dashboard, modais, toast e o pomodoro da barra.
+ *
+ * Sem build e sem framework: as funções são globais de propósito, porque o HTML
+ * chama cada uma direto no `onclick`. Renomear função aqui quebra a tela sem
+ * erro visível.
+ *
+ * O estado é um array só, `modificados`, que é a cópia local do que a API
+ * devolveu. Toda alteração nele termina em salvarClientesBackend(), que reenvia
+ * a lista pelo PUT /api/clientes — não há salvamento parcial nem campo a campo.
+ */
+/* ═══════════════════════════════════════════════════════════════════
    ESTADO GLOBAL
 ═══════════════════════════════════════════════════════════════════ */
 let modificados  = [];

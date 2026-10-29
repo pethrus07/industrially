@@ -1,28 +1,31 @@
 # Arquitetura
 
-Diagramas gerados a partir do Sinapse (o segundo cérebro do Pedro). Cada projeto tem três vistas,
-cada uma numa notação padrão:
+Três vistas do sistema, cada uma numa notação padrão.
 
-1. **Quem usa e para quê**: UML, diagrama de casos de uso.
-2. **O processo principal**: BPMN 2.0, com raias por quem executa.
-3. **A arquitetura**: modelo C4, nível 2 (containers).
+| Vista | Notação | Responde |
+|---|---|---|
+| 1. Casos de uso | UML | Quem usa e para quê |
+| 2. Processo | BPMN 2.0 | Como o trabalho anda, com uma raia para cada quem executa |
+| 3. Arquitetura | C4, nível 2 | De que partes o sistema é feito e com quem conversa |
 
 ## IndustriAlly · CRM e portal de parceiros
 
 Plataforma única da Celiware (um domínio, um login) que junta o CRM interno da equipe e o portal onde parceiros indicam indústrias e acompanham a comissão. Node puro, sem dependências, dados em JSON. Arquivada; serviu de base ao Expert Work.
 
-### Quem usa e para quê (UML)
+### 1. Quem usa e para quê
 
-![Casos de uso · IndustriAlly · CRM e portal de parceiros](./industrially-1-casos-de-uso.svg)
+![Casos de uso de IndustriAlly](./industrially-1-casos-de-uso.svg)
 
-### Da indicação à comissão confirmada (BPMN 2.0)
+### 2. Da indicação à comissão confirmada
 
-![Processo · IndustriAlly · CRM e portal de parceiros](./industrially-2-processo.svg)
+![Processo de IndustriAlly](./industrially-2-processo.svg)
 
-### Arquitetura (C4, containers)
+### 3. Arquitetura
 
-![Arquitetura · IndustriAlly · CRM e portal de parceiros](./industrially-3-arquitetura.svg)
+![Arquitetura de IndustriAlly](./industrially-3-arquitetura.svg)
 
-Editável: [`industrially.excalidraw`](./industrially.excalidraw), abre em [excalidraw.com](https://excalidraw.com) ou no VS Code com a extensão Excalidraw.
+Para editar: [industrially.excalidraw](./industrially.excalidraw), que abre em [excalidraw.com](https://excalidraw.com) ou na extensão Excalidraw do VS Code.
 
-A fonte destes arquivos é o vault do Sinapse (`09-DESENHOS/`); alterações feitas aqui são sobrescritas na próxima publicação.
+## De onde vêm
+
+Os diagramas são gerados a partir do Sinapse, o vault onde o Pedro organiza notas e projetos. Mudança feita direto aqui some na próxima publicação: o lugar de mudar é a especificação no Sinapse.

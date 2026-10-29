@@ -11,7 +11,17 @@ cada uma numa notação padrão:
 
 Plataforma única da Celiware (um domínio, um login) que junta o CRM interno da equipe e o portal onde parceiros indicam indústrias e acompanham a comissão. Node puro, sem dependências, dados em JSON. Arquivada; serviu de base ao Expert Work.
 
-![IndustriAlly · CRM e portal de parceiros](./industrially.svg)
+### Quem usa e para quê (UML)
+
+![Casos de uso · IndustriAlly · CRM e portal de parceiros](./industrially-1-casos-de-uso.svg)
+
+### Da indicação à comissão confirmada (BPMN 2.0)
+
+![Processo · IndustriAlly · CRM e portal de parceiros](./industrially-2-processo.svg)
+
+### Arquitetura (C4, containers)
+
+![Arquitetura · IndustriAlly · CRM e portal de parceiros](./industrially-3-arquitetura.svg)
 
 Editável: [`industrially.excalidraw`](./industrially.excalidraw), abre em [excalidraw.com](https://excalidraw.com) ou no VS Code com a extensão Excalidraw.
 
